@@ -18,7 +18,7 @@
 */
 import Dashboard from "views/Dashboard.jsx";
 import Notifications from "views/Notifications.jsx";
-import Icons from "views/Icons.jsx";
+import Icons from "views/Estudiantes";
 import Typography from "views/Typography.jsx";
 import TableList from "views/Tables.jsx";
 import Maps from "views/Map.jsx";
@@ -34,7 +34,7 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/icons",
+    path: "/estudiantes",
     name: "Estudiantes",
     icon: "nc-icon nc-diamond",
     component: Icons,

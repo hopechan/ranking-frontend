@@ -21,14 +21,14 @@ import Notifications from "views/Notifications.jsx";
 import Icons from "views/Estudiantes";
 import Typography from "views/Typography.jsx";
 import TableList from "views/Tables.jsx";
-import Maps from "views/Map.jsx";
+import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
 import UpgradeToPro from "views/Upgrade.jsx";
 
 var routes = [
   {
     path: "/dashboard",
-    name: "Ranking",
+    name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin"
@@ -41,7 +41,7 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/maps",
+    path: "/nota",
     name: "Notas",
     icon: "nc-icon nc-pin-3",
     component: Maps,
@@ -55,7 +55,7 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/user-page",
+    path: "/table",
     name: "Usuarios",
     icon: "nc-icon nc-single-02",
     component: UserPage,

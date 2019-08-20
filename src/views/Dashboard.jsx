@@ -1,29 +1,27 @@
 import React from "react";
-// react plugin used to create charts
-//import { Line, Pie } from "react-chartjs-2";
-// reactstrap components
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Row,
-  Col
-} from "reactstrap";
-// core components
-import {
-  dashboard24HoursPerformanceChart,
-  dashboardEmailStatisticsChart,
-  dashboardNASDAQChart
-} from "variables/charts.jsx";
+import Barra from "../components/Grafico/Barra"
+import {Card,CardHeader,
+  CardBody,CardFooter,CardTitle,Container,Row,Col} from "reactstrap";
 
 class Dashboard extends React.Component {
   render() {
     return (
       <>
         <div className="content">
-          <h3>Hola</h3>
+          <Row>
+            <Col sm="12" md="4">
+              <Card><CardBody><h4>Hola</h4></CardBody></Card>
+            </Col>
+            <Col sm="12" md="4">
+              <Card><CardBody><h4>Hola</h4></CardBody></Card>
+            </Col>
+            <Col sm="12" md="4">
+              <Card><CardBody><h4>Hola</h4></CardBody></Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm="12" md="10"><Barra/></Col>
+          </Row>
         </div>
       </>
     );

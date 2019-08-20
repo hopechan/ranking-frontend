@@ -9,7 +9,9 @@ class Estudiantes extends React.Component {
     return (
       <>
         <div className="content">
-          <TablaEstudiante></TablaEstudiante>
+          <Row>
+            <Col sm="12" md="12"><TablaEstudiante responsive/></Col>
+          </Row>
         </div>
       </>
     );

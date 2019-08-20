@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+//import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 class Nota extends React.Component {
   render() {
     return (

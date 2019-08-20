@@ -1,8 +1,7 @@
 import React from "react";
-import TablaEstudiantes from '../components/TablaEstudiante/TablaEstudiante'
+import TablaEstudiante from '../components/Tablas/TablaEstudiante'
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Row, Col } from "reactstrap";
-import TablaEstudiante from "components/TablaEstudiante/TablaEstudiante";
+import { Row, Col } from "reactstrap";
 
 class Estudiantes extends React.Component {
   render() {

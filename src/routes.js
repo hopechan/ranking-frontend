@@ -19,16 +19,14 @@
 import Dashboard from "views/Dashboard.jsx";
 import Notifications from "views/Notifications.jsx";
 import Icons from "views/Estudiantes";
-import Typography from "views/Typography.jsx";
-import TableList from "views/Tables.jsx";
 import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
-import UpgradeToPro from "views/Upgrade.jsx";
+import Evaluaciones from "views/Evaluaciones";
 
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Ranking",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin"
@@ -52,6 +50,13 @@ var routes = [
     name: "Materias",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
+    layout: "/admin"
+  },
+  {
+    path: "/evaluaciones",
+    name: "Evaluaciones",
+    icon: "nc-icon nc-bell-55",
+    component: Evaluaciones,
     layout: "/admin"
   },
   {

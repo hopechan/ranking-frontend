@@ -1,7 +1,6 @@
 import React from "react";
 import Barra from "../components/Grafico/Barra"
-import {Card,CardHeader,
-  CardBody,CardFooter,CardTitle,Container,Row,Col} from "reactstrap";
+import {Card,CardBody,Row,Col} from "reactstrap";
 
 class Dashboard extends React.Component {
   render() {

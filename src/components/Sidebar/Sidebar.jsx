@@ -37,10 +37,7 @@ class Sidebar extends React.Component {
         data-active-color={this.props.activeColor}
       >
         <div className="logo">
-          <a
-            href="#"
-            className="simple-text logo-normal"
-          >
+          <a href="/dashboard" className="simple-text logo-normal">
             Ranking Oportunidades
           </a>
         </div>

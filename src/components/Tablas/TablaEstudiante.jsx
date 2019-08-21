@@ -1,27 +1,63 @@
 import React from "react";
-import { Button, Card, CardBody, CardHeader, Table} from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, CardFooter, Pagination, PaginationItem, PaginationLink, Table} from 'reactstrap';
+import paginate from 'paginate-array';
 import API from "../server/api";
 
 class TablaEstudiante extends React.Component{
-    state = {
-        estudiantes : []
+    constructor(props){
+        super(props);
+        this.state = {
+            estudiantes : [],
+            size: 6,
+            page: 1,
+            currPage: null
+        };
+        this.anterior = this.anterior.bind(this);
+        this.siguiente = this.siguiente.bind(this);
     }
 
     componentDidMount(){
         API.get(`Estudiante`)
             .then(res => {
                 const estudiantes = res.data;
-                this.setState({estudiantes})
-                console.log(this.state);
+                const {page, size} = this.state;
+                const currPage = paginate(estudiantes, page, size);
+                this.setState({estudiantes});
+                this.setState({
+                    ...this.state,
+                    estudiantes,
+                    currPage
+                })
             })
     }
 
+    anterior(){
+        console.log("anterior");
+        
+        const {currPage, page, size, estudiantes} = this.state;
+        if (page > 1) {
+            const newPage = page - 1;
+            const newCurrPage = paginate(estudiantes, newPage, size);
+            this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+        }
+    }
+
+    siguiente(){
+        const {currPage, page, size, estudiantes} = this.state;
+        if (page < currPage.totalPages) {
+            const newPage = page + 1;
+            const newCurrPage = paginate(estudiantes, newPage, size);
+            this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+        }
+    }
+
     render() {
+        const { page, size, currPage } = this.state;
         return (
             <div>
                 <div>
                     <Card>
-                        <CardHeader tag="h4">Listado Completo</CardHeader>
+                        <CardHeader tag="h4" className="text-right">Listado Completo</CardHeader>
                         <CardBody>
                             <Table responsive>
                                 <thead>
@@ -39,7 +75,8 @@ class TablaEstudiante extends React.Component{
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.estudiantes.map(e =>
+                                    {currPage &&
+                                        currPage.data.map(e =>
                                         <tr>
                                             <td className="text-center">{e.nombre}</td>
                                             <td className="text-center">{e.apellidos}</td>
@@ -61,6 +98,9 @@ class TablaEstudiante extends React.Component{
                                 </tbody>
                             </Table>
                         </CardBody>
+                        <CardFooter className="text-center">
+                            <Button color="link" onClick={this.anterior}>{"<<"}</Button><Button color="link" onClick={this.siguiente}>{">>"}</Button>
+                        </CardFooter>
                     </Card>
                 </div>
             </div>

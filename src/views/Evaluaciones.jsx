@@ -1,5 +1,6 @@
 import React from "react";
 import TablaEvaluaciones from '../components/Tablas/TablaEvaluaciones'
+import FormEvaluaciones from '../components/Forms/FormEvaluaciones'
 import { Row, Col } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
 
@@ -9,10 +10,17 @@ export default class Evaluaciones extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tipos: []
+      tipos: [],
+      idtipo: '',
+      tipo: '',
+      descripcion: '',
+      editar: false,
     }
+    this.ontipoChange = this.ontipoChange.bind(this);
+    this.ondescripcionChange = this.ondescripcionChange.bind(this);
     this.refresh = this.refresh.bind(this);
     this.cargar = this.cargar.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   cargar(user) {
@@ -34,8 +42,28 @@ export default class Evaluaciones extends React.Component {
       })
   }
 
+  toggle() {
+    this.props.toggle()
+  }
+
   refresh(datos) {
     this.componentDidMount();
+  }
+  ontipoChange(tipo) {
+    this.setState({ tipo: tipo });
+  }
+
+  ondescripcionChange(descripcion) {
+    this.setState({ descripcion: descripcion });
+  }
+
+  clear() {
+    this.setState({
+      idtipo: '',
+      tipo: '',
+      descripcion: '',
+      editar: false
+    });
   }
 
   render() {
@@ -44,8 +72,8 @@ export default class Evaluaciones extends React.Component {
         <div className="content">
           <Row>
             <Col sm="12" md="12">
-              {/* <FormEvaluaciones /> */}
-              <TablaEvaluaciones tipos={this.state.tipos} refresh={this.refresh} cargar={this.cargar} responsive />
+              <FormEvaluaciones ontipoChange={this.ontipoChange} ondescripcionChange={this.ondescripcionChange} tipo={this.state.tipo} descripcion={this.state.descripcion} refresh={this.refresh} idtipo={this.state.idtipo} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} />
+              <TablaEvaluaciones tipos={this.state.tipos} refresh={this.refresh} cargar={this.cargar} toggle={this.toggle} responsive />
             </Col>
           </Row>
         </div>

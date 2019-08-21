@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 import API from "../server/api";
+import { toggle } from "../Forms/FormEvaluaciones";
 
 
 export default class FilaEvaluaciones extends React.Component {
@@ -8,6 +9,7 @@ export default class FilaEvaluaciones extends React.Component {
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
+        this.getById = this.getById.bind(this);
     }
 
     //Metodo para eliminar los datos de la api
@@ -16,7 +18,17 @@ export default class FilaEvaluaciones extends React.Component {
             .then(response => this.props.refresh(response.data))
             .catch(error => console.log(error));
     }
-    
+
+    getById() {
+        API.get('Tipo/' + this.props.user.idtipo)
+            .then(response => {
+                this.props.cargar({
+                    idtipo: response.data.idtipo,
+                    tipo: response.data.tipo,
+                    descripcion: response.data.descripcion
+                });
+            }).catch(error => console.log(error))
+    }
 
     render() {
         return (
@@ -24,10 +36,13 @@ export default class FilaEvaluaciones extends React.Component {
                 <td className="text-center">{this.props.user.tipo}</td>
                 <td className="text-center">{this.props.user.descripcion}</td>
                 <td className="text-center">
-                    <Button color="warning">Editar</Button>
-                </td>
-                <td className="text-center">
-                    <Button color="danger" onClick={this.delete}>Borrar</Button>
+                    <Row>
+                        <Col md="12" >
+                            <Button color="warning" onClick={this.props.toggle}>Editar</Button>
+                            {" "}
+                            <Button color="danger" onClick={this.delete}>Borrar</Button>
+                        </Col>
+                    </Row>
                 </td>
             </tr>
         );

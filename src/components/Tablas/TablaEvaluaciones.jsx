@@ -15,6 +15,10 @@ export default class TablaEvaluaciones extends React.Component {
         this.props.cargar(tipo)
     }
 
+    toggle() {
+        this.props.toggle()
+      }
+
     refresh(tipo) {
         this.props.refresh(tipo)
     }
@@ -37,7 +41,7 @@ export default class TablaEvaluaciones extends React.Component {
                                 <tbody>
                                     {this.props.tipos.map(
                                         (user, i) => (
-                                            <FilaEvaluaciones key={i} user={user} refresh={this.refresh} cargar={this.cargar} />
+                                            <FilaEvaluaciones key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify}/>
                                         )
                                     )}
                                 </tbody>

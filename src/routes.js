@@ -8,7 +8,7 @@ import Evaluaciones from "views/Evaluaciones";
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Inicio",
     icon: "nc-icon nc-layout-11",
     component: Dashboard,
     layout: "/admin"

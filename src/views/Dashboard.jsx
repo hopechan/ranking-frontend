@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Ranking</p>
-                        <CardTitle tag="p"></CardTitle>
+                        <CardTitle tag="p">Lorem</CardTitle>
                         <p />
                       </div>
                     </Col>      
@@ -29,14 +29,45 @@ class Dashboard extends React.Component {
               </Card>
             </Col>
             <Col sm="12" md="4">
-              <Card><CardBody><h4>Hola</h4></CardBody></Card>
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <Col md="4" xs="5">
+                      <div className="icon-big text-center icon-warning">
+                        <i className="nc-icon nc-chart-bar-32 text-warning" />
+                      </div>
+                    </Col>
+                    <Col md="8" xs="7">
+                      <div className="numbers">
+                        <p className="card-category">Info</p>
+                        <CardTitle tag="p">Lorem</CardTitle>
+                      </div>
+                    </Col>
+                  </Row>
+                </CardBody>
+              </Card>
             </Col>
             <Col sm="12" md="4">
-              <Card><CardBody><h4>Hola</h4></CardBody></Card>
+              <Card className="card-stats">
+                <CardBody>
+                    <Row>
+                      <Col md="4" xs="5">
+                        <div className="icon-big text-center icon-warning">
+                          <i className="nc-icon nc-chart-bar-32 text-warning" />
+                        </div>
+                      </Col>
+                      <Col md="8" xs="7">
+                        <div className="numbers">
+                          <p className="card-category">Info</p>
+                          <CardTitle tag="p">Lorem</CardTitle>
+                        </div>
+                      </Col>
+                    </Row>
+                  </CardBody>
+              </Card>
             </Col>
-          </Row>
-          
-          <Row>
+          </Row>    
+          <Row className="justify-content-center">
             <Col sm="12" md="10"><Barra/></Col>
           </Row>
         </div>

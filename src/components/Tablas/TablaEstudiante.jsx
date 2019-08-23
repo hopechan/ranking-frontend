@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, CardBody, CardHeader, CardFooter, Pagination, PaginationItem, PaginationLink, Table} from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, CardFooter, Table} from 'reactstrap';
 import paginate from 'paginate-array';
 import API from "../server/api";
 
@@ -33,8 +33,7 @@ class TablaEstudiante extends React.Component{
 
     anterior(){
         console.log("anterior");
-        
-        const {currPage, page, size, estudiantes} = this.state;
+        const {page, size, estudiantes} = this.state;
         if (page > 1) {
             const newPage = page - 1;
             const newCurrPage = paginate(estudiantes, newPage, size);
@@ -52,7 +51,7 @@ class TablaEstudiante extends React.Component{
     }
 
     render() {
-        const { page, size, currPage } = this.state;
+        const { currPage } = this.state;
         return (
             <div>
                 <div>

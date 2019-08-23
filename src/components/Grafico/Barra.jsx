@@ -1,24 +1,41 @@
 import React from "react";
 import {Card, CardBody} from 'reactstrap';
 import { Chart } from "chart.js";
-// const data = {
-//     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-//     datasets: [
-//     {
-//         label: 'My First dataset',
-//         backgroundColor: 'rgba(255,99,132,0.2)',
-//         borderColor: 'rgba(255,99,132,1)',
-//         borderWidth: 1,
-//         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-//         hoverBorderColor: 'rgba(255,99,132,1)',
-//         data: [65, 59, 80, 81, 56, 55, 40]
-//     }
-//     ]
-// };
+import API from "../server/api.js";
 class Barra extends React.Component { 
     chartRef = React.createRef();
+    constructor(props) {
+        super(props);
+        this.state = {ranking : []};
+        this.grafico = this.grafico.bind(this);
+        this.diezPorCiento = this.grafico.bind(this);
+    }
+
     componentDidMount(){
+        API.get(`Nota/ranking/2017`)
+            .then(res => {
+                this.setState({ranking: res.data});
+                //console.log(this.state.ranking.map(e => e.estudiante));
+                let nombre = this.state.ranking.map(e=>e.estudiante 
+                    );
+            })
+        this.grafico();
+    }
+
+    diezPorCiento(arreglo){
+        let filtro = Math.round(arreglo.length/10);
+        if (filtro === 0) {
+            return arreglo.length;
+        } else {
+            return filtro;
+        }
+    }
+
+    grafico(nombres) {
+        console.log(nombres);
+        
         const grafico = this.chartRef.current.getContext("2d");
+        //let sorted = rawData.sort((a,b) => (b.promedio > a.promedio) ? 1 : -1).filter(e => e.estudiante !== '');
         new Chart(grafico, {
             type: "bar",
             data: {
@@ -37,7 +54,7 @@ class Barra extends React.Component {
         return (
             <div>
                 <Card>
-                    <CardBody><canvas id="myChart" ref={this.chartRef}></canvas></CardBody>
+                    <CardBody><canvas id="graficoBarra" ref={this.chartRef}></canvas></CardBody>
                 </Card>
             </div>
         )

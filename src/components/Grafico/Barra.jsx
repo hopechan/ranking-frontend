@@ -11,16 +11,16 @@ class Barra extends React.Component {
         this.diezPorCiento = this.grafico.bind(this);
     }
 
-    componentDidMount(){
-        API.get(`Nota/ranking/2017`)
-            .then(res => {
-                this.setState({ranking: res.data});
-                //console.log(this.state.ranking.map(e => e.estudiante));
-                let nombre = this.state.ranking.map(e=>e.estudiante 
-                    );
-            })
-        this.grafico();
-    }
+    // componentDidMount(){
+    //     API.get(`Nota/ranking/2017`)
+    //         .then(res => {
+    //             this.setState({ranking: res.data});
+    //             //console.log(this.state.ranking.map(e => e.estudiante));
+    //             let nombre = this.state.ranking.map(e=>e.estudiante 
+    //                 );
+    //         })
+    //     this.grafico();
+    // }
 
     diezPorCiento(arreglo){
         let filtro = Math.round(arreglo.length/10);

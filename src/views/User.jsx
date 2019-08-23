@@ -49,19 +49,19 @@ class User extends React.Component {
                 </div>
                 <CardBody>
                   <div className="author">
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
+                    <a href="#" onClick={e => e.preventDefault()}>
                       <img
                         alt="..."
                         className="avatar border-gray"
                         src={require("assets/img/mike.jpg")}
                       />
-                      <h5 className="title">Chet Faker</h5>
+                      <h5 className="title">Prueba</h5>
                     </a>
-                    <p className="description">@chetfaker</p>
+                    <p className="description">@prueba</p>
                   </div>
                   <p className="description text-center">
-                    "I like the way you work it <br />
-                    No diggity <br />I wanna bag it up"
+                    "I am nigga baby <br />
+                    love i you <br /> Ok"
                   </p>
                 </CardBody>
                 <CardFooter>
@@ -71,19 +71,19 @@ class User extends React.Component {
                       <Col className="ml-auto" lg="3" md="6" xs="6">
                         <h5>
                           12 <br />
-                          <small>Files</small>
+                          <small>Archivos</small>
                         </h5>
                       </Col>
                       <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
                         <h5>
                           2GB <br />
-                          <small>Used</small>
+                          <small>Usados</small>
                         </h5>
                       </Col>
                       <Col className="mr-auto" lg="3">
                         <h5>
                           24,6$ <br />
-                          <small>Spent</small>
+                          <small>Gastado</small>
                         </h5>
                       </Col>
                     </Row>
@@ -92,7 +92,7 @@ class User extends React.Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Team Members</CardTitle>
+                  <CardTitle tag="h4">Miembros del Equipo</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ul className="list-unstyled team-members">
@@ -108,9 +108,9 @@ class User extends React.Component {
                           </div>
                         </Col>
                         <Col md="7" xs="7">
-                          DJ Khaled <br />
-                          <span className="text-muted">
-                            <small>Offline</small>
+                          Esperanza Dueñas <br />
+                          <span className="text-success">
+                            <small>La sujeto</small>
                           </span>
                         </Col>
                         <Col className="text-right" md="3" xs="3">
@@ -137,9 +137,9 @@ class User extends React.Component {
                           </div>
                         </Col>
                         <Col md="7" xs="7">
-                          Creative Tim <br />
+                          Roberto Morales <br />
                           <span className="text-success">
-                            <small>Available</small>
+                            <small>Manco</small>
                           </span>
                         </Col>
                         <Col className="text-right" md="3" xs="3">
@@ -166,9 +166,9 @@ class User extends React.Component {
                           </div>
                         </Col>
                         <Col className="col-ms-7" xs="7">
-                          Flume <br />
-                          <span className="text-danger">
-                            <small>Busy</small>
+                          José Diaz<br />
+                          <span className="text-success">
+                            <small>Pro en fornite</small>
                           </span>
                         </Col>
                         <Col className="text-right" md="3" xs="3">
@@ -190,16 +190,16 @@ class User extends React.Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Profile</CardTitle>
+                  <CardTitle tag="h5">Editar el perfil</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>Company (disabled)</label>
+                          <label>Compañia (desabilidata)</label>
                           <Input
-                            defaultValue="Creative Code Inc."
+                            defaultValue="CDS Company"
                             disabled
                             placeholder="Company"
                             type="text"
@@ -208,9 +208,9 @@ class User extends React.Component {
                       </Col>
                       <Col className="px-1" md="3">
                         <FormGroup>
-                          <label>Username</label>
+                          <label>Nombre de usuario</label>
                           <Input
-                            defaultValue="michael23"
+                            defaultValue="prueba123"
                             placeholder="Username"
                             type="text"
                           />
@@ -219,7 +219,7 @@ class User extends React.Component {
                       <Col className="pl-1" md="4">
                         <FormGroup>
                           <label htmlFor="exampleInputEmail1">
-                            Email address
+                            Email
                           </label>
                           <Input placeholder="Email" type="email" />
                         </FormGroup>
@@ -228,7 +228,7 @@ class User extends React.Component {
                     <Row>
                       <Col className="pr-1" md="6">
                         <FormGroup>
-                          <label>First Name</label>
+                          <label>Primer Nombre</label>
                           <Input
                             defaultValue="Chet"
                             placeholder="Company"
@@ -238,7 +238,7 @@ class User extends React.Component {
                       </Col>
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Last Name</label>
+                          <label>Ultimo Nombre</label>
                           <Input
                             defaultValue="Faker"
                             placeholder="Last Name"

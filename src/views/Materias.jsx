@@ -10,13 +10,13 @@ export default class Materias extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      materias: [],
-      tipos: [],
+      materias: [],//arreglo para las materias
+      tipos: [],//arreglo para los tipos
       idmateria: '',
       idtipo: '',
       materia: '',
       editar: false,
-      modal: false,
+      modal: false
     }
     this.onidmateriaChange = this.onidmateriaChange.bind(this);
     this.onidtipoChange = this.onidtipoChange.bind(this);
@@ -28,6 +28,7 @@ export default class Materias extends React.Component {
     this.tipo = this.tipo.bind(this);
   }
 
+  //para cargar la informacion en el modal de editar
   cargar(user) {
     this.toggle();
     this.setState({
@@ -48,6 +49,7 @@ export default class Materias extends React.Component {
       })
   }
 
+  //Metodo para obtener los datos de la api 
   tipo() {
     API.get('tipo')
       .then(res => {
@@ -56,6 +58,7 @@ export default class Materias extends React.Component {
       })
   }
 
+  //metodo para abrir el modal
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -63,21 +66,27 @@ export default class Materias extends React.Component {
     this.tipo()
   }
 
+  //para recargar los datos
   refresh(datos) {
     this.componentDidMount();
   }
+
+  //cuando haya cambios en materia
   onmateriaChange(materia) {
     this.setState({ materia: materia });
   }
 
+  //cuando haya cambios en tipo
   onidtipoChange(idtipo) {
     this.setState({ idtipo: idtipo });
   }
 
+  //cuando haya cambios en idmateria
   onidmateriaChange(idmateria) {
     this.setState({ idmateria: idmateria });
   }
 
+  //metodo para limpiar los campos y el editar
   clear() {
     this.setState({
       idmateria: '',
@@ -87,7 +96,7 @@ export default class Materias extends React.Component {
     });
   }
 
-
+  //metodo para renderizar la vista
   render() {
     return (
       <>
@@ -102,7 +111,7 @@ export default class Materias extends React.Component {
                 </ModalBody>
               </Modal>
               <div className="table-resposive">
-              <TablaMaterias materias={this.state.materias} refresh={this.refresh} cargar={this.cargar} responsive />
+                <TablaMaterias materias={this.state.materias} refresh={this.refresh} cargar={this.cargar} responsive />
               </div>
             </Col>
           </Row>

@@ -18,6 +18,7 @@ export default class FilaMaterias extends React.Component {
             .catch(error => console.log(error));
     }
 
+    //Metodo para ver los datos por un id
     getById() {
         API.get('materia/' + this.props.user.idmateria)
             .then(response => {

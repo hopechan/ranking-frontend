@@ -12,7 +12,6 @@ export default class FormEvaluaciones extends React.Component {
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
-        this.togglecerrar = this.togglecerrar.bind(this);
     }
 
     clear(e) {
@@ -21,10 +20,6 @@ export default class FormEvaluaciones extends React.Component {
 
     toggle() {
         this.props.toggle();
-    }
-
-    togglecerrar() {
-        this.props.togglecerrar();
     }
 
     onChangetipo(e) {
@@ -76,7 +71,7 @@ export default class FormEvaluaciones extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="success" onClick={this.toggle} value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}
-                        <Button color="danger" onClick={this.togglecerrar}>Cancelar</Button>
+                        <Button color="danger" onClick={this.toggle}>Cancelar</Button>
                     </FormGroup>
                 </Form>
             </div>

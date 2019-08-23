@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from "reactstrap";// reactstrap components
+import { Button, Input, Label, Form, FormGroup } from "reactstrap";// reactstrap components
 import API from "../server/api";
 
 export default class FormEvaluaciones extends React.Component {
@@ -7,24 +7,24 @@ export default class FormEvaluaciones extends React.Component {
     //Metodo constructor
     constructor(props) {
         super(props);
-        this.state = {
-            modal: false,
-        };
         this.onChangetipo = this.onChangetipo.bind(this);
         this.onChangedescripcion = this.onChangedescripcion.bind(this);
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
-    }
-
-    toggle() {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
+        this.togglecerrar = this.togglecerrar.bind(this);
     }
 
     clear(e) {
         this.props.clear();
+    }
+
+    toggle() {
+        this.props.toggle();
+    }
+
+    togglecerrar() {
+        this.props.togglecerrar();
     }
 
     onChangetipo(e) {
@@ -46,15 +46,16 @@ export default class FormEvaluaciones extends React.Component {
                 tipo: this.props.tipo,
                 descripcion: this.props.descripcion
             };
-            API.put('Tipo/', user)
+            API.put('tipo/', user)
                 .then(response => this.props.refresh(response.data))
                 .catch(error => console.log(error))
+                this.clear();
         } else {
             const user = {
                 tipo: this.props.tipo,
                 descripcion: this.props.descripcion
             };
-            API.post('Tipo/', user)
+            API.post('tipo/', user)
                 .then(response => this.props.refresh(response.data))
                 .catch(error => console.log(error))
                 this.clear();
@@ -64,28 +65,20 @@ export default class FormEvaluaciones extends React.Component {
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Tipo de Evaluación</Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nuevo Tipo" : "Editar Tipo"}</ModalHeader>
-                    <ModalBody >
-                        <Form onSubmit={this.accion}>
-                            <FormGroup>
-                                <Label for="tipo">Tipo:</Label>
-                                <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" value={this.props.tipo} onChange={this.onChangetipo} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="descripción">Descripción:</Label>
-                                <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" value={this.props.descripcion} onChange={this.onChangedescripcion} />
-                            </FormGroup>
-                            <FormGroup>
-                                <ModalFooter className="center">
-                                    <Button type="submit" color="success" onClick={this.toggle} value={!this.props.editar ? "Agregar" : "Modificar"}>Agregar</Button>{' '}
-                                    <Button color="danger" onClick={this.toggle}>Cancelar</Button>
-                                </ModalFooter>
-                            </FormGroup>
-                        </Form>
-                    </ModalBody>
-                </Modal>
+                <Form onSubmit={this.accion}>
+                    <FormGroup>
+                        <Label for="tipo">Tipo:</Label>
+                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" value={this.props.tipo} onChange={this.onChangetipo} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="descripción">Descripción:</Label>
+                        <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" value={this.props.descripcion} onChange={this.onChangedescripcion} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button type="submit" color="success" onClick={this.toggle} value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}
+                        <Button color="danger" onClick={this.togglecerrar}>Cancelar</Button>
+                    </FormGroup>
+                </Form>
             </div>
         );
     }

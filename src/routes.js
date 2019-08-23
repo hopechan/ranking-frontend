@@ -1,9 +1,9 @@
 import Dashboard from "views/Dashboard.jsx";
-import Notifications from "views/Notifications.jsx";
 import Icons from "views/Estudiantes";
 import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
+import Materias from "views/Materias";
 
 var routes = [
   {
@@ -28,10 +28,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/notifications",
+    path: "/materias",
     name: "Materias",
     icon: "nc-icon nc-paper",
-    component: Notifications,
+    component: Materias,
     layout: "/admin"
   },
   {

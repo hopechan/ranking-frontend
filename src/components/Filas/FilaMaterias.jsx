@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 import API from "../server/api";
 
 
-export default class FilaEvaluaciones extends React.Component {
+export default class FilaMaterias extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,17 +13,17 @@ export default class FilaEvaluaciones extends React.Component {
 
     //Metodo para eliminar los datos de la api
     delete() {
-        API.delete(`Tipo/` + this.props.user.idtipo)
+        API.delete(`materia/` + this.props.user.idmateria)
             .then(response => this.props.refresh(response.data))
             .catch(error => console.log(error));
     }
 
     getById() {
-        API.get('Tipo/' + this.props.user.idtipo)
+        API.get('materia/' + this.props.user.idmateria)
             .then(response => {
                 this.props.cargar({
-                    idtipo: response.data.idtipo,
-                    tipo: response.data.tipo,
+                    idmateria: response.data.idmateria,
+                    materia: response.data.materia,
                     descripcion: response.data.descripcion
                 });
             }).catch(error => console.log(error))
@@ -32,8 +32,8 @@ export default class FilaEvaluaciones extends React.Component {
     render() {
         return (
             <tr>
+                <td className="text-center">{this.props.user.materia}</td>
                 <td className="text-center">{this.props.user.tipo}</td>
-                <td className="text-center">{this.props.user.descripcion}</td>
                 <td className="text-center">
                             <Button color="warning" onClick={this.getById}>Editar</Button>
                             {" "}

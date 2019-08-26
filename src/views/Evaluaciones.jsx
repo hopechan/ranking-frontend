@@ -51,7 +51,6 @@ export default class Evaluaciones extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
-    this.clear()
   }
 
   //para recargar los datos
@@ -83,7 +82,7 @@ export default class Evaluaciones extends React.Component {
     return (
       <div className="content">
         <Row>
-          <Col sm="12" md="12">
+          <Col sm="12" md="12" lg="12">
             <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Tipo de Evaluación</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nuevo Tipo" : "Editar Tipo"}</ModalHeader>

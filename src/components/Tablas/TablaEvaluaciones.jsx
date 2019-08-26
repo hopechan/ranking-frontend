@@ -21,10 +21,8 @@ export default class TablaEvaluaciones extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
                     <Card>
-                        <CardHeader tag="h4" className="text-center">Tipos de Evaluaciones</CardHeader>
+                        <h4 className="text-center">Tipos de Evaluaciones</h4>
                         <CardBody>
                             <Table responsive>
                                 <thead>
@@ -44,8 +42,6 @@ export default class TablaEvaluaciones extends React.Component {
                             </Table>
                         </CardBody>
                     </Card>
-                </div>
-            </div>
         )
     }
 }

@@ -3,6 +3,7 @@ import TablaMaterias from '../components/Tablas/TablaMaterias'
 import FormMaterias from '../components/Forms/FormMaterias'
 import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
+//import Alertas from '../components/Alertas/Alertas'
 
 export default class Materias extends React.Component {
 
@@ -16,7 +17,8 @@ export default class Materias extends React.Component {
       idtipo: '',
       materia: '',
       editar: false,
-      modal: false
+      modal: false,
+      visible: true
     }
     this.onidmateriaChange = this.onidmateriaChange.bind(this);
     this.onidtipoChange = this.onidtipoChange.bind(this);
@@ -26,6 +28,20 @@ export default class Materias extends React.Component {
     this.clear = this.clear.bind(this);
     this.toggle = this.toggle.bind(this);
     this.tipo = this.tipo.bind(this);
+  }
+
+  //para las Alertas
+  notificationAlert = React.createRef();
+  notify(place, color,message) {
+      var options = {};
+      options = {
+          place: place,
+          message:message,
+          type: color,
+          icon: "nc-icon nc-bell-55",
+          autoDismiss: 7
+      };
+      this.notificationAlert.current.notificationAlert(options);
   }
 
   //para cargar la informacion en el modal de editar
@@ -107,7 +123,7 @@ export default class Materias extends React.Component {
               <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nuevo materia" : "Editar materia"}</ModalHeader>
                 <ModalBody >
-                  <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} />
+                  <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify}/>
                 </ModalBody>
               </Modal>
               <div className="table-resposive">

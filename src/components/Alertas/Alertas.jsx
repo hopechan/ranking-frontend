@@ -1,35 +1,32 @@
 import React from "react";
-import { Alert } from 'reactstrap';
+import NotificationAlert from "react-notification-alert";
 
 
 export default class Alertas extends React.Component {
+
+    //Metodo constructor
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: true
+        };
+    }
+    notificationAlert = React.createRef();
+    notify(place, color,message) {
+        var options = {};
+        options = {
+            place: place,
+            message:message,
+            type: color,
+            icon: "nc-icon nc-bell-55",
+            autoDismiss: 7
+        };
+        this.notificationAlert.current.notificationAlert(options);
+    }
     render() {
         return (
             <div>
-                <Alert color="primary">
-                    This is a primary alert — check it out!
-          </Alert>
-                <Alert color="secondary">
-                    This is a secondary alert — check it out!
-          </Alert>
-                <Alert color="success">
-                    This is a success alert — check it out!
-          </Alert>
-                <Alert color="danger">
-                    This is a danger alert — check it out!
-          </Alert>
-                <Alert color="warning">
-                    This is a warning alert — check it out!
-          </Alert>
-                <Alert color="info">
-                    This is a info alert — check it out!
-          </Alert>
-                <Alert color="light">
-                    This is a light alert — check it out!
-          </Alert>
-                <Alert color="dark">
-                    This is a dark alert — check it out!
-          </Alert>
+            <NotificationAlert ref={this.notificationAlert} />
             </div>
         );
     }

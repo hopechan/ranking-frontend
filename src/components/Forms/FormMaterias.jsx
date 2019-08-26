@@ -13,6 +13,11 @@ export default class FormEvaluaciones extends React.Component {
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.notify = this.notify.bind(this);
+    }
+
+    notify(e) {
+        this.props.notify();
     }
 
     clear(e) {
@@ -21,6 +26,7 @@ export default class FormEvaluaciones extends React.Component {
 
     toggle() {
         this.props.toggle();
+        
     }
 
     onChangemateria(e) {
@@ -36,14 +42,12 @@ export default class FormEvaluaciones extends React.Component {
 
     accion(e) {
         e.preventDefault();
-        if (this.props.materia.length === 0 || this.props.idtipo.length === 0) {
-            return;
-        }
         if (this.props.editar) {
             const user = {
                 idmateria: this.props.idmateria,
-                materia: this.props.materia,
-                idtipo: this.props.idtipo
+                idtipo: this.props.idtipo,
+                materia: this.props.materia
+                
             };
             API.put('materia/', user)
                 .then(response => this.props.refresh(response.data))
@@ -58,6 +62,7 @@ export default class FormEvaluaciones extends React.Component {
                 .then(response => this.props.refresh(response.data))
                 .catch(error => console.log(error))
             this.clear();
+            this.notify("tc","Success","algo :v")
         }
     }
 

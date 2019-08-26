@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, CardBody, CardHeader, Table } from 'reactstrap';
+import { Card, CardBody, CardFooter, Table } from 'reactstrap';
 import FilaMaterias from '../Filas/FilaMaterias';
+//import Paginacion from '../Paginacion/Paginacion';
 
 export default class TablaMaterias extends React.Component {
 
@@ -21,10 +22,8 @@ export default class TablaMaterias extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
                     <Card>
-                        <CardHeader tag="h4" className="text-center">Tabla de Materias</CardHeader>
+                        <h4 className="text-center">Tabla de Materias</h4>
                         <CardBody>
                             <Table responsive>
                                 <thead>
@@ -43,9 +42,10 @@ export default class TablaMaterias extends React.Component {
                                 </tbody>
                             </Table>
                         </CardBody>
+                        <CardFooter className="text-center">
+                            {/* <Paginacion /> */}
+                        </CardFooter>
                     </Card>
-                </div>
-            </div>
         )
     }
 }

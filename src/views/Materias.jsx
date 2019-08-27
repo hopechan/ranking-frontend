@@ -121,7 +121,7 @@ export default class Materias extends React.Component {
             <Col sm="12" md="12">
               <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un materia de Evaluación</Button>
               <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nuevo materia" : "Editar materia"}</ModalHeader>
+                <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
                 <ModalBody >
                   <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify}/>
                 </ModalBody>

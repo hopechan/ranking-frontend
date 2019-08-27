@@ -56,7 +56,7 @@ class TablaEstudiante extends React.Component{
             <div>
                 <div>
                     <Card>
-                        <CardHeader tag="h4" className="text-right">Listado Completo</CardHeader>
+                        <CardHeader tag="h4" className="text-center">Listado Completo</CardHeader>
                         <CardBody>
                             <Table responsive>
                                 <thead>

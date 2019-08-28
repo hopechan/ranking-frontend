@@ -11,42 +11,72 @@ class Barra extends React.Component {
         this.diezPorCiento = this.grafico.bind(this);
     }
 
-    //  componentDidMount(){
-    //      API.get(`Nota/ranking/2017`)
-    //          .then(res => {
-    //              this.setState({ranking: res.data});
-    //              //console.log(this.state.ranking.map(e => e.estudiante));
-    //              let nombre = this.state.ranking.map(e=>e.estudiante 
-    //                  );
-    //          })
-    //      this.grafico();
-    //  }
-
-    diezPorCiento(arreglo){
-        let filtro = Math.round(arreglo.length/10);
-        if (filtro === 0) {
-            return arreglo.length;
-        } else {
-            return filtro;
-        }
+    componentDidMount(){
+        let ranking = this.getData()
+            .then(data => this.filtrar(data))
+            .then(filtro => {return this.ordenar(filtro)})
+            .then(r => this.grafico(r));
     }
 
-    grafico(nombres) {
-        console.log(nombres);
-        
+    async getData(){
+        let data = 
+        fetch(`http://localhost/ROp/api/Nota/ranking/2018`)
+        .then(res => {return res.json()})
+        .catch(error => console.log(`Ha ocurrido el error: ${error}`));
+        return data;
+    }
+
+    filtrar(data){
+        return data.filter((obj, pos, arr) => {
+            return arr.map(mapObj => mapObj.estudiante).indexOf(obj.estudiante) == pos;
+        })
+    }
+
+    obtenerNombre(data){
+        return data.map(items => items.estudiante);
+    }
+
+    obtenerProm(data){
+        return data.map(items => items.promedio);
+    }
+
+    ordenar(data){
+        return data.sort((a,b) =>(b.promedio > a.promedio) ? 1 : -1).filter(e => e.estudiante !== '');
+    }
+
+    grafico(ranking) {
         const grafico = this.chartRef.current.getContext("2d");
-        //let sorted = rawData.sort((a,b) => (b.promedio > a.promedio) ? 1 : -1).filter(e => e.estudiante !== '');
         new Chart(grafico, {
             type: "bar",
             data: {
-                labels: ["Jan", "Feb", "March"],
+                labels: this.obtenerNombre(ranking),
                 datasets :  [
                     {
-                        label: "Sales",
-                        data: [86, 67, 91],
+                        label: "Top 10 Ranking Oportunidades",
+                        data: this.obtenerProm(ranking),
+                        backgroundColor: ['#FF1000', '#808080', '#000000', '#FF0000', '#808080', '#000000', '#FF0000', '#808080', '#000000', '#FF0000'],
                     }
                 ]
-            }, 
+            },
+            options:{
+                responsive: true,
+                legend:{display:false},
+                title:{
+                    display: true,
+                    text: "Top Ranking Oportunidades"
+                },
+                scales:{
+                    yAxes:[{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0, 
+                            suggestedMax: 10,
+                            beginAtZero: true,
+                            stepSize: 2
+                        }
+                    }]
+                }
+            }
         });
     }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import {Card, CardBody} from 'reactstrap';
 import { Chart } from "chart.js";
-import API from "../server/api.js";
 class Barra extends React.Component { 
     chartRef = React.createRef();
     constructor(props) {
@@ -12,7 +11,7 @@ class Barra extends React.Component {
     }
 
     componentDidMount(){
-        let ranking = this.getData()
+            this.getData()
             .then(data => this.filtrar(data))
             .then(filtro => {return this.ordenar(filtro)})
             .then(r => this.grafico(r));
@@ -28,7 +27,7 @@ class Barra extends React.Component {
 
     filtrar(data){
         return data.filter((obj, pos, arr) => {
-            return arr.map(mapObj => mapObj.estudiante).indexOf(obj.estudiante) == pos;
+            return arr.map(mapObj => mapObj.estudiante).indexOf(obj.estudiante) === pos;
         })
     }
 

@@ -42,21 +42,16 @@ class User extends React.Component {
             <Col md="4">
               <Card className="card-user">
                 <div className="image">
-                  <img
-                    alt="..."
-                    src={require("assets/img/damir-bosnjak.jpg")}
-                  />
+                  <img alt="..." src={require("assets/img/damir-bosnjak.jpg")} />
                 </div>
                 <CardBody>
                   <div className="author">
-                    <a href="#" onClick={e => e.preventDefault()}>
                       <img
                         alt="..."
                         className="avatar border-gray"
                         src={require("assets/img/mike.jpg")}
                       />
                       <h5 className="title">Prueba</h5>
-                    </a>
                     <p className="description">@prueba</p>
                   </div>
                   <p className="description text-center">

@@ -3,7 +3,7 @@ import TablaEstudiante from '../components/Tablas/TablaEstudiante'
 
 // reactstrap components
 import { Row, Col, Button, Modal, ModalBody, ModalHeader } from "reactstrap";
-import API from "../components/server/api";
+//import API from "../components/server/api";
 
 class Estudiantes extends React.Component {
   

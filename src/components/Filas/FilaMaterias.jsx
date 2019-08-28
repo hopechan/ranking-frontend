@@ -9,13 +9,19 @@ export default class FilaMaterias extends React.Component {
         super(props);
         this.delete = this.delete.bind(this);
         this.getById = this.getById.bind(this);
+        this.notify = this.notify.bind(this);
     }
 
     //Metodo para eliminar los datos de la api
     delete() {
         API.delete(`materia/` + this.props.user.idmateria)
-            .then(response => this.props.refresh(response.data))
+            .then(response => this.props.refresh(response.data), this.notify("tr","danger","Materia eliminada","nc-icon nc-simple-remove"))
             .catch(error => console.log(error));
+    }
+
+    //alertas
+    notify(place, color, message, icon) {
+        this.props.notify(place, color, message, icon);
     }
 
     //Metodo para ver los datos por un id

@@ -12,10 +12,16 @@ export default class FormEvaluaciones extends React.Component {
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.notify = this.notify.bind(this);
     }
 
     clear(e) {
         this.props.clear();
+    }
+
+    //alertas
+    notify(place, color, message, icon) {
+        this.props.notify(place, color, message, icon);
     }
 
     toggle() {
@@ -42,18 +48,18 @@ export default class FormEvaluaciones extends React.Component {
                 descripcion: this.props.descripcion
             };
             API.put('tipo/', user)
-                .then(response => this.props.refresh(response.data))
+                .then(response => this.props.refresh(response.data),this.notify("tr","warning","Tipo de evaluación editado con exito","nc-icon nc-refresh-69"))
                 .catch(error => console.log(error))
-                this.clear();
+            this.clear();
         } else {
             const user = {
                 tipo: this.props.tipo,
                 descripcion: this.props.descripcion
             };
             API.post('tipo/', user)
-                .then(response => this.props.refresh(response.data))
+                .then(response => this.props.refresh(response.data),this.notify("tr","success","Tipo de evaluación agregado con exito","nc-icon nc-simple-add"))
                 .catch(error => console.log(error))
-                this.clear();
+            this.clear();
         }
     }
 

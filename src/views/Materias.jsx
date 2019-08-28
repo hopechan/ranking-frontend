@@ -3,7 +3,7 @@ import TablaMaterias from '../components/Tablas/TablaMaterias'
 import FormMaterias from '../components/Forms/FormMaterias'
 import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
-//import Alertas from '../components/Alertas/Alertas'
+import NotificationAlert from 'react-notification-alert';
 
 export default class Materias extends React.Component {
 
@@ -16,6 +16,7 @@ export default class Materias extends React.Component {
       idmateria: '',
       idtipo: '',
       materia: '',
+      tipo: '',
       editar: false,
       modal: false,
       visible: true
@@ -28,20 +29,20 @@ export default class Materias extends React.Component {
     this.clear = this.clear.bind(this);
     this.toggle = this.toggle.bind(this);
     this.tipo = this.tipo.bind(this);
+    this.notify = this.notify.bind(this);
   }
 
-  //para las Alertas
-  notificationAlert = React.createRef();
-  notify(place, color,message) {
-      var options = {};
-      options = {
-          place: place,
-          message:message,
-          type: color,
-          icon: "nc-icon nc-bell-55",
-          autoDismiss: 7
-      };
-      this.notificationAlert.current.notificationAlert(options);
+  //Metodos para las Alertas
+  notify(place, color, message, icon) {
+    var options = {};
+    options = {
+      place: place,
+      message: message,
+      type: color,
+      icon: icon,
+      autoDismiss: 5
+    };
+    this.refs.notify.notificationAlert(options);
   }
 
   //para cargar la informacion en el modal de editar
@@ -80,6 +81,9 @@ export default class Materias extends React.Component {
       modal: !prevState.modal
     }));
     this.tipo()
+    if (this.state.modal === false) {
+      this.clear()
+    }
   }
 
   //para recargar los datos
@@ -115,24 +119,23 @@ export default class Materias extends React.Component {
   //metodo para renderizar la vista
   render() {
     return (
-      <>
-        <div className="content">
-          <Row>
-            <Col sm="12" md="12">
-              <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un materia de Evaluación</Button>
-              <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.props.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
-                <ModalBody >
-                  <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify}/>
-                </ModalBody>
-              </Modal>
-              <div className="table-resposive">
-                <TablaMaterias materias={this.state.materias} refresh={this.refresh} cargar={this.cargar} responsive />
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </>
+      <div className="content">
+        <Row>
+          <Col sm="12" md="12">
+          <NotificationAlert ref="notify" />
+            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un materia de Evaluación</Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+              <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
+              <ModalBody >
+                <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} tipo={this.state.tipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
+              </ModalBody>
+            </Modal>
+            <div className="table-resposive">
+              <TablaMaterias materias={this.state.materias} refresh={this.refresh} cargar={this.cargar} notify={this.notify} responsive />
+            </div>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

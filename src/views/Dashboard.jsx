@@ -13,14 +13,14 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <Row>
                     <Col md="4" xs="5">
-                      <div className="icon-big text-center icon-warning">
-                        <i className="nc-icon nc-chart-bar-32 text-warning" />
+                      <div className="icon-big text-center text-danger">
+                        <i className="nc-icon nc-single-02" />
                       </div>
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Ranking</p>
-                        <CardTitle tag="p">Lorem</CardTitle>
+                        <p className="card-category">Alumnos Participantes</p>
+                        <CardTitle tag="p"></CardTitle>
                         <p />
                       </div>
                     </Col>      
@@ -34,13 +34,13 @@ class Dashboard extends React.Component {
                   <Row>
                     <Col md="4" xs="5">
                       <div className="icon-big text-center icon-warning">
-                        <i className="nc-icon nc-chart-bar-32 text-warning" />
+                        <i className="nc-icon nc-single-02 text-danger" />
                       </div>
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Info</p>
-                        <CardTitle tag="p">Lorem</CardTitle>
+                        <p className="card-category">Alumnos Ranking</p>
+                        <CardTitle tag="p"></CardTitle>
                       </div>
                     </Col>
                   </Row>
@@ -53,13 +53,13 @@ class Dashboard extends React.Component {
                     <Row>
                       <Col md="4" xs="5">
                         <div className="icon-big text-center icon-warning">
-                          <i className="nc-icon nc-chart-bar-32 text-warning" />
+                          <i className="nc-icon nc-chart-bar-32 text-danger" />
                         </div>
                       </Col>
                       <Col md="8" xs="7">
                         <div className="numbers">
-                          <p className="card-category">Info</p>
-                          <CardTitle tag="p">Lorem</CardTitle>
+                          <p className="card-category">Mejor Promedio</p>
+                          <CardTitle tag="p"> </CardTitle>
                         </div>
                       </Col>
                     </Row>

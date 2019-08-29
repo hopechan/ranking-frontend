@@ -1,32 +1,27 @@
 import React from "react";
-import { Card, CardBody, CardHeader,Row, Col } from "reactstrap";
+import { Card, CardBody, CardHeader, Col, ListGroup, Row } from "reactstrap";
 import ModalNotas from "../components/Modales/ModalNotas";
+import FormNota from "../components/Forms/FormNota";
+import ListaNota from "../components/Listas/ListaNota";
 class Nota extends React.Component {
   render() {
     return (
       <>
         <div className="content">
           <Row>
-            <Col sm="12" md="12">
-              <Card>
-                <CardHeader>Materias Centro Escolar</CardHeader>
-                <CardBody><ModalNotas></ModalNotas></CardBody>
-              </Card>
+            <Col md="3" sm="6">
+              <ListGroup>
+                <ListaNota></ListaNota>
+                <ListaNota></ListaNota>
+                <ListaNota></ListaNota>
+              </ListGroup>
+              <br/>
             </Col>
-          </Row>
-          <Row>
-            <Col sm="12" md="12">
+            <Col md="9" sm="6">
               <Card>
-                <CardHeader>Materias CCGK</CardHeader>
-                <CardBody><h4>lorem</h4></CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="12" md="12">
-              <Card>
-                <CardHeader>Certificaciones</CardHeader>
-                <CardBody><h4>lorem</h4></CardBody>
+                <CardBody>
+                  
+                </CardBody>
               </Card>
             </Col>
           </Row>

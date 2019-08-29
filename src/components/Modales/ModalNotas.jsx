@@ -18,11 +18,11 @@ export default class ModalNotas extends React.Component{
     render() {
         return (
             <div>
-                <Button color="" onClick={this.toggle}>CCGK</Button>
+                <Button onClick={this.toggle}>CCGK</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Materias</ModalHeader>
                     <ModalBody>
-                        <h5>lorem</h5>
+                        
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>

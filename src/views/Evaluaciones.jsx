@@ -17,7 +17,8 @@ export default class Evaluaciones extends React.Component {
       descripcion: '',
       editar: false,
       modal: false,
-      visible: true
+      visible: true,
+      tipoerror: '',
     }
     this.ontipoChange = this.ontipoChange.bind(this);
     this.ondescripcionChange = this.ondescripcionChange.bind(this);
@@ -77,8 +78,22 @@ export default class Evaluaciones extends React.Component {
     this.componentDidMount();
   }
   //cuando haya cambios en tipo
+  // ontipoChange(tipo) {
+  //   this.setState({ tipo: tipo });
+  // }
+
   ontipoChange(tipo) {
-    this.setState({ tipo: tipo });
+    this.setState({ tipo: tipo }, () => {
+      this.validartipo();
+    });
+  };
+
+  validartipo = () => {
+    const { tipo } = this.state;
+    this.setState({
+      tipoerror:
+        tipo.length > 3 ? null : `<div className='invalid-feedback'>El tipo de evaluación debe tener más de 3 caracteres.</div>`
+    });
   }
 
   //cuando haya cambios en descripcion
@@ -108,7 +123,7 @@ export default class Evaluaciones extends React.Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nuevo Tipo" : "Editar Tipo"}</ModalHeader>
               <ModalBody >
-                <FormEvaluaciones ontipoChange={this.ontipoChange} ondescripcionChange={this.ondescripcionChange} tipo={this.state.tipo} descripcion={this.state.descripcion} refresh={this.refresh} idtipo={this.state.idtipo} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
+                <FormEvaluaciones validartipo={this.validartipo} ontipoChange={this.ontipoChange} ondescripcionChange={this.ondescripcionChange} tipo={this.state.tipo} descripcion={this.state.descripcion} refresh={this.refresh} idtipo={this.state.idtipo} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
               </ModalBody>
             </Modal>
             <div className="table-resposive">

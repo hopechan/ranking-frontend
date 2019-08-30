@@ -41,6 +41,10 @@ export default class FormEvaluaciones extends React.Component {
 
     accion(e) {
         e.preventDefault();
+        if (this.props.materia.length < 4 ) {
+            this.notify("tr","danger","Materia no agregada","nc-icon nc-zoom-split")
+            return;
+        }
         if (this.props.editar) {
             const user = {
                 idmateria: this.props.idmateria,
@@ -51,7 +55,7 @@ export default class FormEvaluaciones extends React.Component {
             API.put('materia/', user)
                 .then(response => this.props.refresh(response.data),this.notify("tr","warning","Materia editada con exito","nc-icon nc-refresh-69"))
                 .catch(error => console.log(error))
-            
+            this.toggle();
             this.clear();
         } else {
             const user = {
@@ -61,6 +65,7 @@ export default class FormEvaluaciones extends React.Component {
             API.post('materia/', user)
                 .then(response => this.props.refresh(response.data),this.notify("tr","success","Materia agregada con exito","nc-icon nc-simple-add"))
                 .catch(error => console.log(error))
+            this.toggle();
             this.clear();
             
         }
@@ -78,10 +83,13 @@ export default class FormEvaluaciones extends React.Component {
                         <Label for="idtipo">Tipo:</Label>
                         <Input type="select" name="idtipo" id="idtipo" onChange={this.onChangeidtipo} >
                             <option value="">Seleccione un tipo</option>
+<<<<<<< Updated upstream
                             {/* <option value={this.props.idtipo} selected hidden>{this.props.idtipo}aa</option> */}
                                 {this.props.tipos.map(
+=======
+                             {this.props.tipos.map(
+>>>>>>> Stashed changes
                                     (user,i) => (
-                                        //selected = (user.idtipo === this.props.idtipo) ? 'selected' : 'false';
                                         <option key={i} value={user.idtipo}>{user.tipo}</option>
                                     )
                                 )
@@ -89,7 +97,7 @@ export default class FormEvaluaciones extends React.Component {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button type="submit" color="success" onClick={this.toggle} value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}
+                        <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}
                         <Button color="danger" onClick={this.toggle}>Cancelar</Button>
                     </FormGroup>
                 </Form>

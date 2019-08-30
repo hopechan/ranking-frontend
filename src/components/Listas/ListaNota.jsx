@@ -1,5 +1,7 @@
 import React from "react";
-import { Col, Collapse, ListGroupItem, Row } from "reactstrap";
+import { Collapse, ListGroup, ListGroupItem } from "reactstrap";
+import ListaMateria from "./ListaMateria";
+
 export default class ListaNota extends React.Component{
     constructor(props){
         super(props);
@@ -14,10 +16,12 @@ export default class ListaNota extends React.Component{
     render() {
         return (
             <div>
-                <ListGroupItem onClick={this.toggle}>CCGK</ListGroupItem>
-                <Collapse isOpen={this.state.collapse}>
-                    <p>Funciona :v</p>
-                </Collapse>
+                <ListGroup>
+                    <ListGroupItem onClick={this.toggle}>{this.props.tipo}</ListGroupItem>
+                    <Collapse isOpen={this.state.collapse}>
+                        <ListaMateria tipo={this.props.tipo}/>
+                    </Collapse>
+                </ListGroup>
             </div>
         )
     }

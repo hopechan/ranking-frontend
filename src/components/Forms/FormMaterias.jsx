@@ -15,6 +15,7 @@ export default class FormEvaluaciones extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.notify = this.notify.bind(this);
     }
+    
     notify(place, color, message, icon) {
         this.props.notify(place, color, message, icon);
     }
@@ -78,7 +79,7 @@ export default class FormEvaluaciones extends React.Component {
                         <Input type="select" name="idtipo" id="idtipo" onChange={this.onChangeidtipo} >
                             <option value="">Seleccione un tipo</option>
                             {/* <option value={this.props.idtipo} selected hidden>{this.props.idtipo}aa</option> */}
-                             {this.props.tipos.map(
+                                {this.props.tipos.map(
                                     (user,i) => (
                                         //selected = (user.idtipo === this.props.idtipo) ? 'selected' : 'false';
                                         <option key={i} value={user.idtipo}>{user.tipo}</option>

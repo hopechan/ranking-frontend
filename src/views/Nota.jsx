@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, CardBody, CardHeader, Col, ListGroup, Row } from "reactstrap";
-import ModalNotas from "../components/Modales/ModalNotas";
-import FormNota from "../components/Forms/FormNota";
+import { Card, CardBody, Col, Row } from "reactstrap";
 import ListaNota from "../components/Listas/ListaNota";
+import TabsNotas  from "../components/Tabs/TabsNotas";
+
 class Nota extends React.Component {
   render() {
     return (
@@ -10,17 +10,15 @@ class Nota extends React.Component {
         <div className="content">
           <Row>
             <Col md="3" sm="6">
-              <ListGroup>
-                <ListaNota></ListaNota>
-                <ListaNota></ListaNota>
-                <ListaNota></ListaNota>
-              </ListGroup>
+              <ListaNota tipo = "CCGK"></ListaNota>
+              <ListaNota tipo = "Centro Escolar"></ListaNota>
+              <ListaNota tipo = "Certificaciones"></ListaNota>
               <br/>
             </Col>
             <Col md="9" sm="6">
               <Card>
                 <CardBody>
-                  
+                  <TabsNotas/>
                 </CardBody>
               </Card>
             </Col>

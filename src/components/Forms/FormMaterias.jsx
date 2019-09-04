@@ -83,7 +83,7 @@ export default class FormEvaluaciones extends React.Component {
                         <Label for="idtipo">Tipo:</Label>
                         <Input type="select" name="idtipo" id="idtipo" onChange={this.onChangeidtipo} >
                             <option value="">Seleccione un tipo</option>
-                             {this.props.tipos.map(
+                            {this.props.tipos.map(
                                     (user,i) => (
                                         <option key={i} value={user.idtipo}>{user.tipo}</option>
                                     )

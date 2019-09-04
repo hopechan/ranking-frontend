@@ -164,7 +164,7 @@ export default class FormEvaluaciones extends React.Component {
                         <Col>
                             <FormGroup>
                                 <Label for="centro_escolar">Centro Escolar:</Label>
-                                <Input type="text" name="centro_escolar" id="centro_escolar" placeholder="" value={this.props.seccion} onChange={this.onseccionChange}/>
+                                <Input type="text" name="centro_escolar" id="centro_escolar" placeholder="" value={this.props.centro_escolar} onChange={this.oncentro_escolarChange}/>
                             </FormGroup>
                             <FormGroup>
                                 <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}

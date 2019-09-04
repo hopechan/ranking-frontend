@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Form, Input, Table } from "reactstrap";// reactstrap components
-import API from "../server/api";
+import { Button, Form, Table } from "reactstrap";// reactstrap components
+//import API from "../server/api";
 
 export default class FormNota extends React.Component { 
     //Metodo constructor

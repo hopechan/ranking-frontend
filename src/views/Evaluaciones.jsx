@@ -4,6 +4,7 @@ import FormEvaluaciones from '../components/Forms/FormEvaluaciones'
 import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
+import paginate from 'paginate-array';
 
 export default class Evaluaciones extends React.Component {
 
@@ -11,7 +12,7 @@ export default class Evaluaciones extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tipos: [],//arreglo para los tipos
+      tipos: [], //arreglo para los tipos
       idtipo: '',
       tipo: '',
       descripcion: '',
@@ -19,6 +20,10 @@ export default class Evaluaciones extends React.Component {
       modal: false,
       visible: true,
       tipoerror: '',
+      size: 4,
+      page: 1,
+      currPage: null,
+      totalpag: null
     }
     this.ontipoChange = this.ontipoChange.bind(this);
     this.ondescripcionChange = this.ondescripcionChange.bind(this);
@@ -27,6 +32,11 @@ export default class Evaluaciones extends React.Component {
     this.clear = this.clear.bind(this);
     this.toggle = this.toggle.bind(this);
     this.notify = this.notify.bind(this);
+    this.siguiente = this.siguiente.bind(this);
+    this.anterior = this.anterior.bind(this);
+    this.primerapag = this.primerapag.bind(this);
+    this.ultimapag = this.ultimapag.bind(this);
+    this.numero = this.numero.bind(this);
   }
 
   //para cargar la informacion en el modal de editar
@@ -56,12 +66,17 @@ export default class Evaluaciones extends React.Component {
 
   //Metodo para obtener los datos de la api
   componentDidMount() {
-    API.get(`Tipo`)
+    API.get(`tipo`)
       .then(res => {
         const tipos = res.data;
-        this.setState({ tipos })
+        const { page, size } = this.state;
+        const currPage = paginate(tipos, page, size);
+        this.setState({ ...this.state, tipos, currPage});
+        this.setState({
+          totalpag: this.state.currPage.totalPages
+        })
       })
-  }
+    }
 
   //metodo para abrir el modal
   toggle() {
@@ -111,6 +126,45 @@ export default class Evaluaciones extends React.Component {
     });
   }
 
+  anterior() {
+    const { page, size, tipos } = this.state;
+    if (page > 1) {
+      const newPage = page - 1;
+      const newCurrPage = paginate(tipos, newPage, size);
+      this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+    }
+  }
+
+  siguiente() {
+    const { currPage, page, size, tipos } = this.state;
+    if (page < currPage.totalPages) {
+      const newPage = page + 1;
+      const newCurrPage = paginate(tipos, newPage, size);
+      this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+    }
+  }
+
+  primerapag() {
+    const { size, tipos } = this.state;
+    const newPage = 1;
+    const newCurrPage = paginate(tipos, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
+  ultimapag() {
+    const { size, tipos,currPage } = this.state;
+    const newPage = currPage.totalPages;
+    const newCurrPage = paginate(tipos, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
+  numero(numero) {
+    const { size, tipos } = this.state;
+    const newPage = numero;
+    const newCurrPage = paginate(tipos, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
 
   //metodo para renderizar la vista
   render() {
@@ -127,7 +181,7 @@ export default class Evaluaciones extends React.Component {
               </ModalBody>
             </Modal>
             <div className="table-resposive">
-              <TablaEvaluaciones tipos={this.state.tipos} refresh={this.refresh} cargar={this.cargar} notify={this.notify} responsive />
+              <TablaEvaluaciones tipos={this.state.tipos} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
             </div>
           </Col>
         </Row>

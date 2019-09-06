@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, CardHeader, CardFooter, Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Card, CardBody, CardFooter, Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import FilaEstudiantes from "components/Filas/FilaEstudiantes";
 
 export default class TablaEstudiantes extends React.Component {
@@ -8,8 +8,6 @@ export default class TablaEstudiantes extends React.Component {
         this.state = {
             array: [],
         };
-        this.anterior = this.anterior.bind(this);
-        this.siguiente = this.siguiente.bind(this);
         this.refresh = this.refresh.bind(this);
         this.cargar = this.cargar.bind(this);
         this.notify = this.notify.bind(this);
@@ -65,7 +63,6 @@ export default class TablaEstudiantes extends React.Component {
             <div>
                 <div>
                     <Card>
-                        <CardHeader tag="h4" className="text-center">Listado Completo</CardHeader>
                         <CardBody>
                             <Table responsive>
                                 <thead>
@@ -92,25 +89,25 @@ export default class TablaEstudiantes extends React.Component {
                                 </tbody>
                             </Table>
                         </CardBody>
-                        <CardFooter className="card text-center">
-                            <Pagination right>
+                        <CardFooter className="mx-auto">
+                            <Pagination>
                                 <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
-                                    <PaginationLink first onClick={this.primerapag} />
+                                    <PaginationLink first onClick={this.primerapag} className="bg-dark text-white"/>
                                 </PaginationItem>
                                 <PaginationItem className={this.props.page === 1 ? "disabled" : ""} >
-                                    <PaginationLink previous onClick={this.anterior} />
+                                    <PaginationLink previous onClick={this.anterior} className="bg-dark text-white"/>
                                 </PaginationItem>
                                 {/* Para los numeros dinamicos de la paginación */}
                                 {array.map((item, i) => (
                                     <PaginationItem key={i} className={this.props.page === item ? "active" : ""}>
-                                        <PaginationLink onClick={() => this.numero(item)}>{item}</PaginationLink>
+                                        <PaginationLink onClick={() => this.numero(item)} className="bg-dark text-white">{item}</PaginationLink>
                                     </PaginationItem>
                                 ))}
                                 <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                                    <PaginationLink next onClick={this.siguiente} />
+                                    <PaginationLink next onClick={this.siguiente} className="bg-dark text-white"/>
                                 </PaginationItem>
                                 <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                                    <PaginationLink last onClick={this.ultimapag} />
+                                    <PaginationLink last onClick={this.ultimapag} className="bg-dark text-white"/>
                                 </PaginationItem>
                             </Pagination>
                         </CardFooter>

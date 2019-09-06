@@ -4,6 +4,8 @@ import FormMaterias from '../components/Forms/FormMaterias'
 import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
+import paginate from 'paginate-array';
+import '../assets/css/Materia.css';
 
 export default class Materias extends React.Component {
 
@@ -19,7 +21,11 @@ export default class Materias extends React.Component {
       tipo: '',
       editar: false,
       modal: false,
-      visible: true
+      visible: true,
+      size: 4,
+      page: 1,
+      currPage: null,
+      totalpag: null
     }
     this.onidmateriaChange = this.onidmateriaChange.bind(this);
     this.onidtipoChange = this.onidtipoChange.bind(this);
@@ -30,6 +36,11 @@ export default class Materias extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.tipo = this.tipo.bind(this);
     this.notify = this.notify.bind(this);
+    this.siguiente = this.siguiente.bind(this);
+    this.anterior = this.anterior.bind(this);
+    this.primerapag = this.primerapag.bind(this);
+    this.ultimapag = this.ultimapag.bind(this);
+    this.numero = this.numero.bind(this);
   }
 
   //Metodos para las Alertas
@@ -59,12 +70,17 @@ export default class Materias extends React.Component {
 
   //Metodo para obtener los datos de la api
   componentDidMount() {
-    API.get('Materia')
+    API.get(`materia`)
       .then(res => {
         const materias = res.data;
-        this.setState({ materias })
+        const { page, size } = this.state;
+        const currPage = paginate(materias, page, size);
+        this.setState({ ...this.state, materias, currPage});
+        this.setState({
+          totalpag: this.state.currPage.totalPages
+        })
       })
-  }
+    }
 
   //Metodo para obtener los datos de la api 
   tipo() {
@@ -116,6 +132,45 @@ export default class Materias extends React.Component {
     });
   }
 
+  anterior() {
+    const { page, size, materias } = this.state;
+    if (page > 1) {
+      const newPage = page - 1;
+      const newCurrPage = paginate(materias, newPage, size);
+      this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+    }
+  }
+
+  siguiente() {
+    const { currPage, page, size, materias } = this.state;
+    if (page < currPage.totalPages) {
+      const newPage = page + 1;
+      const newCurrPage = paginate(materias, newPage, size);
+      this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+    }
+  }
+
+  primerapag() {
+    const { size, materias } = this.state;
+    const newPage = 1;
+    const newCurrPage = paginate(materias, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
+  ultimapag() {
+    const { size, materias,currPage } = this.state;
+    const newPage = currPage.totalPages;
+    const newCurrPage = paginate(materias, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
+  numero(numero) {
+    const { size, materias } = this.state;
+    const newPage = numero;
+    const newCurrPage = paginate(materias, newPage, size);
+    this.setState({ page: newPage, currPage: newCurrPage });
+  }
+
   //metodo para renderizar la vista
   render() {
     return (
@@ -123,7 +178,7 @@ export default class Materias extends React.Component {
         <Row>
           <Col sm="12" md="12">
           <NotificationAlert ref="notify" />
-            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un materia de Evaluación</Button>
+            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar una Materia</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
               <ModalBody >
@@ -131,7 +186,7 @@ export default class Materias extends React.Component {
               </ModalBody>
             </Modal>
             <div className="table-resposive">
-              <TablaMaterias materias={this.state.materias} refresh={this.refresh} cargar={this.cargar} notify={this.notify} responsive />
+              <TablaMaterias materias={this.state.materias} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
             </div>
           </Col>
         </Row>

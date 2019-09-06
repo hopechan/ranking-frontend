@@ -25,7 +25,7 @@ export default class Estudiantes extends React.Component {
       editar: false,
       modal: false,
       visible: true,
-      size: 5,
+      size: 4,
       page: 1,
       currPage: null,
       totalpag: null
@@ -221,7 +221,7 @@ export default class Estudiantes extends React.Component {
         <Row>
           <Col sm="12" md="12" lg="12">
             <NotificationAlert ref="notify" />
-            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante de Evaluación</Button>
+            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nuevo Estudiante" : "Editar Estudiante"}</ModalHeader>
               <ModalBody >

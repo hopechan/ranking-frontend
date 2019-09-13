@@ -25,7 +25,8 @@ export default class Materias extends React.Component {
       size: 4,
       page: 1,
       currPage: null,
-      totalpag: null
+      totalpag: null,
+      selectedOption: null,
     }
     this.onidmateriaChange = this.onidmateriaChange.bind(this);
     this.onidtipoChange = this.onidtipoChange.bind(this);
@@ -33,7 +34,6 @@ export default class Materias extends React.Component {
     this.refresh = this.refresh.bind(this);
     this.cargar = this.cargar.bind(this);
     this.clear = this.clear.bind(this);
-    this.toggle = this.toggle.bind(this);
     this.tipo = this.tipo.bind(this);
     this.notify = this.notify.bind(this);
     this.siguiente = this.siguiente.bind(this);
@@ -61,11 +61,10 @@ export default class Materias extends React.Component {
     this.toggle();
     this.setState({
       idmateria: user.idmateria,
-      materia: user.materia,
       idtipo: user.idtipo,
-      editar: true
+      materia: user.materia,
+      editar: true,
     });
-
   }
 
   //Metodo para obtener los datos de la api
@@ -92,7 +91,7 @@ export default class Materias extends React.Component {
   }
 
   //metodo para abrir el modal
-  toggle() {
+  toggle= () => {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
@@ -103,7 +102,7 @@ export default class Materias extends React.Component {
   }
 
   //para recargar los datos
-  refresh(datos) {
+  refresh() {
     this.componentDidMount();
   }
 
@@ -113,8 +112,8 @@ export default class Materias extends React.Component {
   }
 
   //cuando haya cambios en tipo
-  onidtipoChange(idtipo) {
-    this.setState({ idtipo: idtipo });
+  onidtipoChange(selectedOption) {
+    this.setState({ selectedOption: selectedOption });
   }
 
   //cuando haya cambios en idmateria
@@ -182,7 +181,7 @@ export default class Materias extends React.Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
               <ModalBody >
-                <FormMaterias tipos={this.state.tipos} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} tipo={this.state.tipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
+                <FormMaterias tipos={this.state.tipos} selectedOption={this.state.selectedOption} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} tipo={this.state.tipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
               </ModalBody>
             </Modal>
             <div className="table-resposive">

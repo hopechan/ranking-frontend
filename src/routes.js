@@ -4,6 +4,7 @@ import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
+import Ranking from "views/Ranking";
 
 var routes = [
   {
@@ -46,6 +47,13 @@ var routes = [
     name: "Usuarios",
     icon: "nc-icon nc-single-02",
     component: UserPage,
+    layout: "/admin"
+  },
+  {
+    path: "/Ranking",
+    name: "Ranking",
+    icon: "nc-icon nc-single-02",
+    component: Ranking,
     layout: "/admin"
   }
 ];

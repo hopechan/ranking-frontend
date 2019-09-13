@@ -1,36 +1,42 @@
 import React from "react";
-import { ListGroup , ListGroupItem } from "reactstrap";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import API from "../server/api";
-export default class ListaNota extends React.Component{
-    constructor(props){
+
+export default class ListaNota extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {collapse: false, materias:[]};
+        this.state = {
+            collapse: false,
+            materias: []
+        };
         this.accion = this.accion.bind(this);
     }
 
-    componentWillMount(){
-        API.get(`Materia`)
+    componentWillMount() {
+        API.get(`materia`)
             .then(res => {
                 const materias = res.data;
-                this.setState({materias});
+                this.setState({ materias });
+                console.log(materias);
+                
             })
     }
 
-    accion(){
+    accion() {
         console.log(this.props.tipo);
     }
 
     render() {
-        const {materias} = this.state;
+        const { materias } = this.state;
         return (
             <div>
                 <ListGroup>
-                {materias.map((m,i) => {
-                    if (this.props.tipo === m.tipo) {
-                        return <ListGroupItem color="info" onClick={this.accion} key={i}>{m.materia}</ListGroupItem>
-                    }
-                    return null;
-                })}
+                    {materias.map((m, i) => {
+                        if (this.props.tipo === m.tipo) {
+                            return <ListGroupItem color="info" onClick={this.accion} key={i}>{m.materia}</ListGroupItem>
+                        }
+                        return null;
+                    })}
                 </ListGroup>
             </div>
         )

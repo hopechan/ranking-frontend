@@ -67,15 +67,10 @@ export default class TablaEstudiantes extends React.Component {
                             <Table responsive>
                                 <thead >
                                     <tr>
-                                        <th className="text-center" id="tabla">Nombre</th>
-                                        <th className="text-center" id="tabla">Apellidos</th>
-                                        <th className="text-center">Fecha de Nacimiento</th>
-                                        <th className="text-center">Telefono</th>
+                                        <th className="text-center" id="tabla">Nombre Completo</th>
                                         <th className="text-center">email</th>
-                                        <th className="text-center">Direccion</th>
                                         <th className="text-center">Año</th>
                                         <th className="text-center">Seccion</th>
-                                        <th className="text-center">Centro Escolar</th>
                                         <th colSpan="2" className="text-center">Opciones</th>
                                     </tr>
                                 </thead>
@@ -91,10 +86,10 @@ export default class TablaEstudiantes extends React.Component {
                         </CardBody>
                         <CardFooter className="mx-auto">
                             <Pagination>
-                                <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
+                                <PaginationItem className={ this.props.page <= 2  ? "disabled" : ""}>
                                     <PaginationLink first onClick={this.primerapag} className="bg-dark text-white"/>
                                 </PaginationItem>
-                                <PaginationItem className={this.props.page === 1 ? "disabled" : ""} >
+                                <PaginationItem className={ this.props.page === 1 ? "disabled" : ""} >
                                     <PaginationLink previous onClick={this.anterior} className="bg-dark text-white"/>
                                 </PaginationItem>
                                 {/* Para los numeros dinamicos de la paginación */}

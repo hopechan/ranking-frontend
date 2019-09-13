@@ -30,8 +30,8 @@ export default class FilaMaterias extends React.Component {
             .then(response => {
                 this.props.cargar({
                     idmateria: response.data.idmateria,
-                    materia: response.data.materia,
-                    descripcion: response.data.descripcion
+                    idtipo: response.data.idtipo,
+                    materia: response.data.materia
                 });
             }).catch(error => console.log(error))
     }

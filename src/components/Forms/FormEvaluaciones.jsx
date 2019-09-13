@@ -73,19 +73,19 @@ export default class FormEvaluaciones extends React.Component {
 
     render() {
         const isvalidtipo = this.props.tipo.length > 3;
-        const isvaliddescripcion = this.props.descripcion.length < 80;
+        const isvaliddescripcion = this.props.descripcion.length < 80 && this.props.descripcion.length > 3;
         return (
             <div>
                 <Form onSubmit={this.accion}>
                     <FormGroup>
                         <Label for="tipo">Tipo:</Label>
-                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={`form-control ${ isvalidtipo? '':'is-invalid' }`} value={this.props.tipo} onChange={this.onChangetipo}  onBlur={this.validartipo}/>
+                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={`form-control ${ isvalidtipo? 'is-valid':'is-invalid' }`} value={this.props.tipo} onChange={this.onChangetipo}  onClick={this.validartipo}/>
                         { isvalidtipo? null: <div className='invalid-feedback'>El tipo de evaluación debe tener más de 3 caracteres.</div> }
                     </FormGroup>
                     <FormGroup>
                         <Label for="descripción">Descripción:</Label>
-                        <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" className={`form-control ${ isvaliddescripcion? 'valid':'is-invalid' }`} value={this.props.descripcion} onChange={this.onChangedescripcion} />
-                        { isvaliddescripcion? null: <div className='invalid-feedback'>El tipo de evaluación no puede contener más de 80 caracteres.</div> }
+                        <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" className={`form-control ${ isvaliddescripcion? 'is-valid':'is-invalid' }`} value={this.props.descripcion} onChange={this.onChangedescripcion} />
+                        { isvaliddescripcion? null: <div className='invalid-feedback'>La descrioción de evaluación debe tener más de 3 caracteres y no puede contener más de 80 caracteres.</div> }
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}

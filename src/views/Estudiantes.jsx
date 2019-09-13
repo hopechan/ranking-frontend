@@ -5,6 +5,7 @@ import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// 
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
 import paginate from 'paginate-array';
+import '../assets/css/Materia.css';
 
 export default class Estudiantes extends React.Component {
 

@@ -20,10 +20,15 @@ export default class FormEvaluaciones extends React.Component {
         this.onanioChange = this.onanioChange.bind(this);
         this.onseccionChange = this.onseccionChange.bind(this);
         this.oncentro_escolarChange = this.oncentro_escolarChange.bind(this);
+        this.validartipo = this.validartipo.bind(this);
     }
 
     clear(e) {
         this.props.clear();
+    }
+    
+    validartipo(e) {
+        this.props.validartipo();
     }
 
     //alertas

@@ -55,9 +55,9 @@ export default class TablaEvaluaciones extends React.Component {
     render() {
         //el array para los numeros de la paginación
         let i = 1;
-        let array = [];
+        let numero = [];
         while (i <= this.props.totalpag) {
-            array[i] = i;
+            numero[i] = i;
             i++;
         }
         return (
@@ -91,7 +91,7 @@ export default class TablaEvaluaciones extends React.Component {
                             <PaginationLink previous onClick={this.anterior} className="bg-dark text-white" />
                         </PaginationItem>
                         {/* Para los numeros dinamicos de la paginación */}
-                        {array.map((item, i) => (
+                        {numero.map((item, i) => (
                             <PaginationItem key={i} className={this.props.page === item ? "active" : ""}>
                                 <PaginationLink onClick={() => this.numero(item)} className="bg-dark text-white">{item}</PaginationLink>
                             </PaginationItem>

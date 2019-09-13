@@ -5,6 +5,7 @@ import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// 
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
 import paginate from 'paginate-array';
+import Buscador from '../components/Buscador/Buscador';
 
 export default class Estudiantes extends React.Component {
 
@@ -197,6 +198,10 @@ export default class Estudiantes extends React.Component {
     this.setState({ page: newPage, currPage: newCurrPage });
   }
 
+  handleTermChange(busqueda){
+    console.log(busqueda);
+  }
+
   //metodo para limpiar los campos y el editar
   clear() {
     this.setState({
@@ -221,7 +226,10 @@ export default class Estudiantes extends React.Component {
         <Row>
           <Col sm="12" md="12" lg="12">
             <NotificationAlert ref="notify" />
-            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button>
+            <Row>
+              <Col sm = "6" md ="6"><Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button></Col>
+              <Col sm = "6" md = {{ size: 3, offset: 3}}><Buscador onTermChange={this.handleTermChange}></Buscador></Col>
+            </Row>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nuevo Estudiante" : "Editar Estudiante"}</ModalHeader>
               <ModalBody >

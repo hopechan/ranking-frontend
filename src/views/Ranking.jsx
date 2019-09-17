@@ -2,6 +2,8 @@ import React from "react";
 import { Row, Col, } from "reactstrap";// reactstrap components
 import TablaRanking from '../components/Tablas/TablaRanking'
 import paginate from 'paginate-array';
+import API from "../components/server/api";
+import Select from 'react-select';
 
 export default class Ranking extends React.Component {
 
@@ -23,57 +25,36 @@ export default class Ranking extends React.Component {
             size: 4,
             page: 1,
             currPage: null,
-            totalpag: null
+            totalpag: null,
+            selectedOption: 2018,//saber el año actual y restarle para saber los de 3er año
         }
         this.siguiente = this.siguiente.bind(this);
         this.anterior = this.anterior.bind(this);
         this.primerapag = this.primerapag.bind(this);
         this.ultimapag = this.ultimapag.bind(this);
         this.numero = this.numero.bind(this);
-        this.filtrar = this.filtrar.bind(this);
-        this.ordenar = this.ordenar.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
     componentDidMount() {
-        this.getData()
-            .then(data => {
-                 this.filtrar(data)
+        API.get(`/estudiante/getByYear/` + this.state.selectedOption)
+            .then(res => {
+                const estudiantes = res.data;
                 const { page, size } = this.state;
-                const currPage = paginate( page, size);
-                this.setState({ ...this.state,  currPage });
+                const currPage = paginate(estudiantes, page, size);
+                this.setState({ ...this.state, estudiantes, currPage });
                 this.setState({
                     totalpag: this.state.currPage.totalPages
                 })
             })
-            .then(filtro => {return this.ordenar(filtro)})
+            console.log(this.state.selectedOption.value);
+            
     }
+      //para recargar los datos
+  refresh(datos) {
+    this.componentDidMount();
+  }
 
-    async getData() {
-        let data =
-            fetch(`http://localhost/ROp/api/Nota/ranking/2018`)
-                .then(res => { return res.json() })
-                .catch(error => console.log(`Ha ocurrido el error: ${error}`));
-        return data;
-    }
-
-    filtrar(data){
-        return data.filter((obj, pos, arr) => {
-            return arr.map(mapObj => mapObj.estudiante).indexOf(obj.estudiante) === pos;
-        })
-    }
-
-    ordenar(data){
-        return data.sort((a,b) =>(b.promedio > a.promedio) ? 1 : -1).filter(e => e.estudiante !== '');
-    }
-
-    obtenerNombre(data){
-        return data.map(items => items.estudiante);
-    }
-
-    obtenerProm(data){
-        return data.map(items => items.promedio);
-    }
-    
     anterior() {
         const { page, size, estudiantes } = this.state;
         if (page > 1) {
@@ -113,14 +94,27 @@ export default class Ranking extends React.Component {
         this.setState({ page: newPage, currPage: newCurrPage });
     }
 
+    handleChange = selectedOption => {
+        this.setState({ selectedOption : selectedOption}); 
+        this.refresh()
+      };
+      
+
     //metodo para renderizar la vista
     render() {
+        let a = 1;
+        let año = [];
+        while (a <= 3) {
+            año[a] = new Date().getFullYear()-a;
+            
+            a++;
+        }
         return (
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
-                        <TablaRanking page={this.state.page} totalpag={this.state.totalpag} />
-                        {console.log(this.state.estudiantes)}
+                        <Select onChange={this.handleChange} value={this.state.selectedOption} options={año}></Select>
+                        <TablaRanking page={this.state.page} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
                     </Col>
                 </Row>
             </div>

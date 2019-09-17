@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-import FilaRanking from "components/Filas/FilaRanking";
+import FilaEstudiantes from "components/Filas/FilaEstudiantes";
 
 export default class TablaEstudiantes extends React.Component {
     constructor(props) {
@@ -83,7 +83,7 @@ export default class TablaEstudiantes extends React.Component {
                                     {this.props.currPage &&
                                         this.props.currPage.data.map(
                                             (user, i) => (
-                                                <FilaRanking key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
+                                                <FilaEstudiantes key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
                                             )
                                         )}
                                 </tbody>

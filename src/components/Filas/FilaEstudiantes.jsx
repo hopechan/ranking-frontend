@@ -45,16 +45,16 @@ export default class FilaEstudiantes extends React.Component {
 
     render() {
         return (
-            <tr>
+            <tr id="algo">
                 <td className="text-center">{this.props.user.nombre}</td>
                 <td className="text-center">{this.props.user.apellidos}</td>
-                <td className="text-center" padding="2px">{this.props.user.fecha_nacimiento}</td>
+                <td className="text-center">{this.props.user.fecha_nacimiento}</td>
                 <td className="text-center">{this.props.user.telefono}</td>
                 <td className="text-center">{this.props.user.email}</td>
                 <td className="text-center">{this.props.user.direccion}</td>
-                <td className="text-center"padding="2px">{this.props.user.anio}</td>
-                <td className="text-center" padding="2px">{this.props.user.seccion}</td>
-                <td className="text-center" padding="2px">{this.props.user.centro_escolar}</td>
+                <td className="text-center">{this.props.user.anio}</td>
+                <td className="text-center">{this.props.user.seccion}</td>
+                <td className="text-center">{this.props.user.centro_escolar}</td>
                 <td className="text-center">
                     <Button color="warning" onClick={this.getById}>Editar</Button>
                     {" "}

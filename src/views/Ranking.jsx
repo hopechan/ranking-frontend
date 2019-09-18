@@ -26,7 +26,8 @@ export default class Ranking extends React.Component {
             page: 1,
             currPage: null,
             totalpag: null,
-            selectedOption: 2018,//saber el año actual y restarle para saber los de 3er año
+            selectedOption: { value: 2018 },
+            algo:null,
         }
         this.siguiente = this.siguiente.bind(this);
         this.anterior = this.anterior.bind(this);
@@ -34,10 +35,11 @@ export default class Ranking extends React.Component {
         this.ultimapag = this.ultimapag.bind(this);
         this.numero = this.numero.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        API.get(`/estudiante/getByYear/` + this.state.selectedOption)
+        API.get(`/estudiante/getByYear/` + this.state.selectedOption.value)
             .then(res => {
                 const estudiantes = res.data;
                 const { page, size } = this.state;
@@ -47,13 +49,11 @@ export default class Ranking extends React.Component {
                     totalpag: this.state.currPage.totalPages
                 })
             })
-            console.log(this.state.selectedOption.value);
-            
     }
-      //para recargar los datos
-  refresh(datos) {
-    this.componentDidMount();
-  }
+    //para recargar los datos
+    refresh() {
+        this.componentDidMount();
+    }
 
     anterior() {
         const { page, size, estudiantes } = this.state;
@@ -94,26 +94,25 @@ export default class Ranking extends React.Component {
         this.setState({ page: newPage, currPage: newCurrPage });
     }
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption : selectedOption}); 
-        this.refresh()
-      };
-      
+    handleChange(selectedOption) {
+        this.setState({ selectedOption: selectedOption });
+        this.refresh();
+    };
+
 
     //metodo para renderizar la vista
     render() {
         let a = 1;
         let año = [];
         while (a <= 3) {
-            año[a] = new Date().getFullYear()-a;
-            
+            año[a] = { value: new Date().getFullYear() - a, label: new Date().getFullYear() - a }
             a++;
         }
         return (
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
-                        <Select onChange={this.handleChange} value={this.state.selectedOption} options={año}></Select>
+                        <Select onChange={this.handleChange} value={this.state.selectedOption} options={año} />
                         <TablaRanking page={this.state.page} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
                     </Col>
                 </Row>

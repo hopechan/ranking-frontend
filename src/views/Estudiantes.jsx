@@ -6,6 +6,7 @@ import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
 import paginate from 'paginate-array';
 import Buscador from '../components/Buscador/Buscador';
+import '../assets/css/Materia.css';
 
 export default class Estudiantes extends React.Component {
 

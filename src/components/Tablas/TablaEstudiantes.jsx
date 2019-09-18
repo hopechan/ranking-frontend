@@ -76,7 +76,7 @@ export default class TablaEstudiantes extends React.Component {
                                         <th className="text-center">Año</th>
                                         <th className="text-center">Seccion</th>
                                         <th className="text-center">Centro Escolar</th>
-                                        <th colSpan="2" className="text-center" id="opcion">Opciones</th>
+                                        <th colSpan="2" className="text-center">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody >

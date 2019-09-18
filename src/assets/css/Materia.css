@@ -1,9 +1,13 @@
 #tabla {
     width: 20%;
-    height: 20px;
+    height: 10%;
+}
+
+td {
+    padding: 20px !important
 }
 
 #opcion {
-    margin-bottom: 5px;
+    display: inline-flex;
 }
 

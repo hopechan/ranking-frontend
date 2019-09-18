@@ -55,9 +55,9 @@ export default class FilaEstudiantes extends React.Component {
                 <td className="text-center">{this.props.user.anio}</td>
                 <td className="text-center">{this.props.user.seccion}</td>
                 <td className="text-center">{this.props.user.centro_escolar}</td>
-                <td className="text-center">
+                <td className="text-center" id="opcion">
                     <Button color="warning" onClick={this.getById}>Editar</Button>
-                    {" "}
+                    {"  "}
                     <Button color="danger" onClick={this.delete}>Borrar</Button>
                 </td>
             </tr>

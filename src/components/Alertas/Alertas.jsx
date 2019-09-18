@@ -1,7 +1,6 @@
 import React from "react";
 import NotificationAlert from "react-notification-alert";
 
-
 export default class Alertas extends React.Component {
 
     //Metodo constructor

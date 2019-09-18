@@ -94,11 +94,10 @@ export default class Ranking extends React.Component {
         this.setState({ page: newPage, currPage: newCurrPage });
     }
 
-    handleChange(selectedOption) {
-        this.setState({ selectedOption: selectedOption });
-        this.refresh();
+    handleChange = selectedOption => {
+        this.setState({ selectedOption : selectedOption}); 
+        this.refresh()
     };
-
 
     //metodo para renderizar la vista
     render() {

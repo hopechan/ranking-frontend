@@ -10,7 +10,7 @@ export default class FormEvaluaciones extends React.Component {
         super(props);
         this.state = {
             selectedOption: null,
-          };
+        };
         this.onChangemateria = this.onChangemateria.bind(this);
         this.onChangeidtipo = this.onChangeidtipo.bind(this);
         this.onChangeidmateria = this.onChangeidmateria.bind(this);

@@ -97,8 +97,7 @@ export default class Ranking extends React.Component {
     handleChange = selectedOption => {
         this.setState({ selectedOption : selectedOption}); 
         this.refresh()
-      };
-      
+    };
 
     //metodo para renderizar la vista
     render() {

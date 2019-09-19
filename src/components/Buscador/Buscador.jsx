@@ -1,7 +1,5 @@
 import React from "react";
 import AsyncSelect from "react-select/async";
-import API from "../server/api";
-import { resolve } from "path";
 
 export default class Buscador extends React.Component{
     constructor(props) {
@@ -14,7 +12,7 @@ export default class Buscador extends React.Component{
             callback([])
         }else{
             setTimeout(() => {
-                fetch(`http://localhost/ROp/api/estudiante/${inputValue}`, {method: "GET"})
+                fetch(`http://localhost/ROp/api/estudiante/buscar/${inputValue}`, {method: "GET"})
                 .then((res) => {return res.json()})
                 .then((data) => {
                     const tempArray = [];

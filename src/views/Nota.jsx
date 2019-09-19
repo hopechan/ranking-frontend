@@ -18,7 +18,7 @@ class Nota extends React.Component {
             <Col md="9" sm="6">
               <Card>
                 <CardBody>
-                  <TabsNotas materia = {}/>
+                  <TabsNotas materia/>
                 </CardBody>
               </Card>
             </Col>

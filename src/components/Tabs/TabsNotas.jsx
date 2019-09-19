@@ -19,27 +19,25 @@ export default class TabsNotas extends React.Component {
     }
 
     render(){
+        var currentTime = new Date()
+        const year = currentTime.getFullYear();
         return(
             <div>
                 <Nav tabs>
                     <NavItem>
-                        <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1'); }}>1° Year</NavLink>
+                        <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1'); }}>Class {year + 2}</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2'); }}>2° Year</NavLink>
+                        <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2'); }}>Class {year + 1}</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3'); }}>3° Year</NavLink>
+                        <NavLink className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3'); }}>Class {year}</NavLink>
                     </NavItem>
                 </Nav>
                 <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="1">
-                        <Row>
-                            <Col sm="12" md="12"><FormNota/></Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="2">:v holi desde la pestaña 2</TabPane>
-                    <TabPane tabId="3">:v holi desde la pestaña 3</TabPane>
+                    <TabPane tabId="1"><Row><Col sm = "12" md="12"><FormNota anio = {year} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
+                    <TabPane tabId="2"><Row><Col sm = "12" md="12"><FormNota anio = {year - 1} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
+                    <TabPane tabId="3"><Row><Col sm = "12" md="12"><FormNota anio = {year - 2} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
                 </TabContent>
             </div>
         );

@@ -17,13 +17,12 @@ export default class ListaNota extends React.Component {
             .then(res => {
                 const materias = res.data;
                 this.setState({ materias });
-                console.log(materias);
-                
-            })
+            }
+        )
     }
 
-    accion() {
-        console.log(this.props.tipo);
+    accion(event) {
+        return event.target.innerText;
     }
 
     render() {
@@ -33,7 +32,7 @@ export default class ListaNota extends React.Component {
                 <ListGroup>
                     {materias.map((m, i) => {
                         if (this.props.tipo === m.tipo) {
-                            return <ListGroupItem color="info" onClick={this.accion} key={i}>{m.materia}</ListGroupItem>
+                            return <ListGroupItem color="info" onClick={this.accion} value = {m.materia} key={i}>{m.materia}</ListGroupItem>
                         }
                         return null;
                     })}

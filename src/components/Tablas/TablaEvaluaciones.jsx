@@ -61,50 +61,54 @@ export default class TablaEvaluaciones extends React.Component {
             i++;
         }
         return (
-            <Card>
-                <h4 className="text-center">Tipos de Evaluaciones</h4>
-                <CardBody>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th className="text-center">Tipo</th>
-                                <th className="text-center">Descripción</th>
-                                <th colSpan="2" className="text-center">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.currPage &&
-                                this.props.currPage.data.map(
-                                    (user, i) => (
-                                        <FilaEvaluaciones key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
-                                    )
-                                )}
-                        </tbody>
-                    </Table>
-                </CardBody>
-                <CardFooter className="mx-auto">
-                    <Pagination>
-                        <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
-                            <PaginationLink first onClick={this.primerapag} className="bg-dark text-white" />
-                        </PaginationItem>
-                        <PaginationItem className={this.props.page === 1 ? "disabled" : ""} >
-                            <PaginationLink previous onClick={this.anterior} className="bg-dark text-white" />
-                        </PaginationItem>
-                        {/* Para los numeros dinamicos de la paginación */}
-                        {numero.map((item, i) => (
-                            <PaginationItem key={i} className={this.props.page === item ? "active" : ""}>
-                                <PaginationLink onClick={() => this.numero(item)} className="bg-dark text-white">{item}</PaginationLink>
-                            </PaginationItem>
-                        ))}
-                        <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                            <PaginationLink next onClick={this.siguiente} className="bg-dark text-white" />
-                        </PaginationItem>
-                        <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                            <PaginationLink last onClick={this.ultimapag} className="bg-dark text-white" />
-                        </PaginationItem>
-                    </Pagination>
-                </CardFooter>
-            </Card>
+            <div>
+                <div>
+                    <Card>
+                        <h4 className="text-center">Tipos de Evaluaciones</h4>
+                        <CardBody>
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th className="text-center">Tipo</th>
+                                        <th className="text-center">Descripción</th>
+                                        <th colSpan="2" className="text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.props.currPage &&
+                                        this.props.currPage.data.map(
+                                            (user, i) => (
+                                                <FilaEvaluaciones key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
+                                            )
+                                        )}
+                                </tbody>
+                            </Table>
+                        </CardBody>
+                        <CardFooter className="mx-auto">
+                            <Pagination>
+                                <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
+                                    <PaginationLink first onClick={this.primerapag} className="bg-dark text-white" />
+                                </PaginationItem>
+                                <PaginationItem className={this.props.page === 1 ? "disabled" : ""} >
+                                    <PaginationLink previous onClick={this.anterior} className="bg-dark text-white" />
+                                </PaginationItem>
+                                {/* Para los numeros dinamicos de la paginación */}
+                                {numero.map((item, i) => (
+                                    <PaginationItem key={i} className={this.props.page === item ? "active" : ""}>
+                                        <PaginationLink onClick={() => this.numero(item)} className="bg-dark text-white">{item}</PaginationLink>
+                                    </PaginationItem>
+                                ))}
+                                <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
+                                    <PaginationLink next onClick={this.siguiente} className="bg-dark text-white" />
+                                </PaginationItem>
+                                <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
+                                    <PaginationLink last onClick={this.ultimapag} className="bg-dark text-white" />
+                                </PaginationItem>
+                            </Pagination>
+                        </CardFooter>
+                    </Card>
+                </div>
+            </div>
         )
     }
 }

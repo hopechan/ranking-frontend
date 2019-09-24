@@ -37,8 +37,8 @@ export default class FormEvaluaciones extends React.Component {
         this.props.onmateriaChange(e.target.value);
     }
 
-    onChangeidtipo(e) {
-        this.props.onidtipoChange(e.target.value);
+    onChangeidtipo(id) {
+        this.props.onidtipoChange(id);
     }
     onChangeidmateria(e) {
         this.props.onidmateriaChange(e.target.value);
@@ -51,11 +51,13 @@ export default class FormEvaluaciones extends React.Component {
             return;
         }
         if (this.props.editar) {
+            if (this.state.selectedOption.value.length==0) {
+            e.preventDefault();
+            }
             const user = {
                 idmateria: this.props.idmateria,
                 idtipo: this.state.selectedOption.value,
                 materia: this.props.materia
-
             };
             API.put('materia/', user)
                 .then(response => this.props.refresh(response.data), this.notify("tr", "warning", "Materia editada con exito", "nc-icon nc-refresh-69"))
@@ -78,6 +80,10 @@ export default class FormEvaluaciones extends React.Component {
     handleChange = selectedOption => {
         this.setState({ selectedOption : selectedOption});  
       };
+    
+    validar(){
+        
+    }
 
     render() {
         let i = 0;
@@ -91,23 +97,11 @@ export default class FormEvaluaciones extends React.Component {
                 <Form onSubmit={this.accion}>
                     <FormGroup>
                         <Label for="materia">Materia:</Label>
-                        <Input type="text" name="materia" id="materia" placeholder="Matematicas" value={this.props.materia} onChange={this.onChangemateria} required/>
+                        <Input type="text" name="materia" id="materia" placeholder="Matematicas" value={this.props.materia} onChange={this.onChangemateria} onBlur={this.validar} required/>
                     </FormGroup>
-                    {/*<FormGroup>
-                        <Label for="idtipo">Tipo:</Label>
-                         <Input type="select" name="idtipo" id="idtipo" onChange={this.onChangeidtipo}>
-                            <option value="">Seleccione un tipo</option>
-                            {this.props.tipos.map(
-                                (user, i) => (
-                                    <option key={i} value={user.idtipo} defaultValue={user.idtipo === this.props.idtipo ? "true" : "false"}>{user.tipo}-{user.idtipo}-{this.props.idtipo}</option>
-                                )
-                            )
-                            }
-                        </Input> 
-                    </FormGroup>*/}
                     <FormGroup>
                         <Label for="idtipo">Tipo:</Label>
-                        <Select name="idtipo" id="idtipo" value={this.state.selectedOption} onChange={this.handleChange} options={array}></Select>
+                        <Select name="idtipo" id="idtipo" defaultValue={this.props.tipo}  onChange={this.handleChange} options={array} required/>
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}

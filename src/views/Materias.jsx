@@ -58,13 +58,13 @@ export default class Materias extends React.Component {
 
   //para cargar la informacion en el modal de editar
   cargar(user) {
-    this.toggle();
     this.setState({
       idmateria: user.idmateria,
-      idtipo: user.idtipo,
+      tipo: {"value":user.idtipo,"label":user.tipo},
       materia: user.materia,
       editar: true,
     });
+    this.toggle();
   }
 
   //Metodo para obtener los datos de la api
@@ -127,6 +127,7 @@ export default class Materias extends React.Component {
       idmateria: '',
       materia: '',
       idtipo: '',
+      tipo: '',
       editar: false
     });
   }

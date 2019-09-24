@@ -15,7 +15,7 @@ export default class FilaMaterias extends React.Component {
     //Metodo para eliminar los datos de la api
     delete() {
         API.delete(`materia/` + this.props.user.idmateria)
-            .then(response => this.props.refresh(response.data), this.notify("tr","danger","Materia eliminada","nc-icon nc-simple-remove"))
+            .then(response => this.props.refresh(response.data), this.notify("tr", "danger", "Materia eliminada", "nc-icon nc-simple-remove"))
             .catch(error => console.log(error));
     }
 
@@ -31,6 +31,7 @@ export default class FilaMaterias extends React.Component {
                 this.props.cargar({
                     idmateria: response.data.idmateria,
                     idtipo: response.data.idtipo,
+                    tipo: response.data.tipo,
                     materia: response.data.materia
                 });
             }).catch(error => console.log(error))
@@ -42,9 +43,9 @@ export default class FilaMaterias extends React.Component {
                 <td className="text-center">{this.props.user.materia}</td>
                 <td className="text-center">{this.props.user.tipo}</td>
                 <td className="text-center">
-                            <Button color="warning" onClick={this.getById}>Editar</Button>
-                            {" "}
-                            <Button color="danger" onClick={this.delete}>Borrar</Button>
+                    <Button color="warning" onClick={this.getById}>Editar</Button>
+                    {" "}
+                    <Button color="danger" onClick={this.delete}>Borrar</Button>
                 </td>
             </tr>
         );

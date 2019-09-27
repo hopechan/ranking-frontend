@@ -55,7 +55,6 @@ export default class Estudiantes extends React.Component {
 
   //para cargar la informacion en el modal de editar
   cargar(user) {
-    this.toggle();
     this.setState({
       idestudiante: user.idestudiante,
       nombre: user.nombre,
@@ -69,7 +68,7 @@ export default class Estudiantes extends React.Component {
       centro_escolar: user.centro_escolar,
       editar: true
     });
-
+  this.toggle();
   }
 
   //Metodo para las Alertas

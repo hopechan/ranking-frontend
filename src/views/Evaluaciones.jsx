@@ -41,14 +41,13 @@ export default class Evaluaciones extends React.Component {
 
   //para cargar la informacion en el modal de editar
   cargar(user) {
-    this.toggle();
     this.setState({
       idtipo: user.idtipo,
       tipo: user.tipo,
       descripcion: user.descripcion,
       editar: true
     });
-
+  this.toggle();
   }
 
     //Metodo para las Alertas

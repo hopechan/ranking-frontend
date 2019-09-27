@@ -26,7 +26,7 @@ export default class Ranking extends React.Component {
             page: 1,
             currPage: null,
             totalpag: null,
-            selectedOption: { value: 2018 },
+            selectedOption: { value: 0 },
             algo:null,
         }
         this.siguiente = this.siguiente.bind(this);
@@ -94,9 +94,9 @@ export default class Ranking extends React.Component {
         this.setState({ page: newPage, currPage: newCurrPage });
     }
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption : selectedOption}); 
-        this.refresh()
+    handleChange(selectedOption) {
+        this.componentDidMount()
+        this.setState({ selectedOption : selectedOption});
     };
 
     //metodo para renderizar la vista
@@ -111,7 +111,7 @@ export default class Ranking extends React.Component {
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
-                        <Select onChange={this.handleChange} value={this.state.selectedOption} options={año} />
+                        <Select onChange={this.handleChange}  value={this.state.selectedOption} options={año} />
                         <TablaRanking page={this.state.page} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
                     </Col>
                 </Row>

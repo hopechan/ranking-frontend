@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from 'reactstrap';
 import API from "../server/api";
 
-
 export default class FilaEstudiantes extends React.Component {
 
     constructor(props) {

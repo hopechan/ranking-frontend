@@ -4,7 +4,6 @@ import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
-import Login from "views/Login";
 
 var routes = [
   {
@@ -49,12 +48,5 @@ var routes = [
     component: UserPage,
     layout: "/admin"
   },
-  {
-    path: "/Login",
-    name: "Login",
-    icon: "nc-icon nc-single-02",
-    component: Login,
-    layout: "/admin"
-  }
 ];
 export default routes;

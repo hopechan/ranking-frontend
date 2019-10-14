@@ -10,6 +10,7 @@ export default class FormEvaluaciones extends React.Component {
         super(props);
         this.state = {
             selectedOption: null,
+            algo: [],
         };
         this.onChangemateria = this.onChangemateria.bind(this);
         this.onChangeidtipo = this.onChangeidtipo.bind(this);
@@ -51,14 +52,20 @@ export default class FormEvaluaciones extends React.Component {
             return;
         }
         if (this.props.editar) {
-            if (this.state.selectedOption.value.length==0) {
             e.preventDefault();
+            if (this.state.selectedOption === null) {
+                var user = {
+                    idmateria: this.props.idmateria,
+                    idtipo: this.props.defaultValue.value,
+                    materia: this.props.materia
+                };
+            } else {
+                 user = {
+                    idmateria: this.props.idmateria,
+                    idtipo: this.state.algo.value,
+                    materia: this.props.materia
+                };
             }
-            const user = {
-                idmateria: this.props.idmateria,
-                idtipo: this.state.selectedOption.value,
-                materia: this.props.materia
-            };
             API.put('materia/', user)
                 .then(response => this.props.refresh(response.data), this.notify("tr", "warning", "Materia editada con exito", "nc-icon nc-refresh-69"))
                 .catch(error => console.log(error))
@@ -78,12 +85,11 @@ export default class FormEvaluaciones extends React.Component {
         }
     }
     handleChange = selectedOption => {
-        this.setState({ selectedOption : selectedOption});  
-      };
-    
-    validar(){
-        
-    }
+        this.setState({
+            selectedOption: selectedOption,
+            algo: selectedOption
+        });
+    };
 
     render() {
         let i = 0;
@@ -97,11 +103,11 @@ export default class FormEvaluaciones extends React.Component {
                 <Form onSubmit={this.accion}>
                     <FormGroup>
                         <Label for="materia">Materia:</Label>
-                        <Input type="text" name="materia" id="materia" placeholder="Matematicas" value={this.props.materia} onChange={this.onChangemateria} onBlur={this.validar} required/>
+                        <Input type="text" name="materia" id="materia" placeholder="Matematicas" value={this.props.materia} onChange={this.onChangemateria} onBlur={this.validar} required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="idtipo">Tipo:</Label>
-                        <Select name="idtipo" id="idtipo" defaultValue={this.props.tipo}  onChange={this.handleChange} options={array} required/>
+                        <Select name="idtipo" id="idtipo" defaultValue={this.props.defaultValue} onChange={this.handleChange} options={array} required />
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}

@@ -79,8 +79,8 @@ export default class FormEvaluaciones extends React.Component {
                 <Form onSubmit={this.accion}>
                     <FormGroup>
                         <Label for="tipo">Tipo:</Label>
-                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={`form-control ${ isvalidtipo? 'is-valid':'is-invalid' }`} value={this.props.tipo} onChange={this.onChangetipo}  onBlur={this.validartipo}/>
-                        { isvalidtipo? null: <div className='invalid-feedback'>El tipo de evaluación debe tener más de 3 caracteres.</div> }
+                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={`form-control ${ isvalidtipo? 'is-valid':'' }`} value={this.props.tipo} onChange={this.onChangetipo} onKeyUp={this.validartipo}/>
+                        {/* { isvalidtipo? null: <div className='invalid-feedback'>El tipo de evaluación debe tener más de 3 caracteres.</div> } */}
                     </FormGroup>
                     <FormGroup>
                         <Label for="descripción">Descripción:</Label>

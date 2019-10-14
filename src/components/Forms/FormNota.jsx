@@ -6,14 +6,20 @@ export default class FormNota extends React.Component {
     //Metodo constructor
     constructor(props) {
         super(props);
+        this.state={
+            notas: [],
+            nota_p1:"",
+            nota_p2:"",
+            nota_p3:"",
+            nota_p4:"",
+        }
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
         this.notify = this.notify.bind(this);
-        this.state = { notas: [] }
     }
 
-    clear(e) {
+    clear() {
         this.props.clear();
     }
 
@@ -65,8 +71,8 @@ export default class FormNota extends React.Component {
                                 <td><Input value = {n.nota_p4} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
                                 <td>
                                     <Row>
-                                        <Col sm = "6" md = "6"><Button/></Col>
-                                        <Col sm = "6" md = "6"><Button/></Col>
+                                        <Col sm = "6" md = "6"><Button color="success">G</Button></Col>
+                                        <Col sm = "6" md = "6"><Button color="warning">E</Button></Col>
                                     </Row>
                                 </td>
                             </tr>

@@ -51,6 +51,7 @@ export default class Estudiantes extends React.Component {
     this.primerapag = this.primerapag.bind(this);
     this.ultimapag = this.ultimapag.bind(this);
     this.numero = this.numero.bind(this);
+    this.handleTermChange = this.handleTermChange.bind(this);
     }
 
   //para cargar la informacion en el modal de editar

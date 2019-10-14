@@ -27,6 +27,7 @@ export default class Materias extends React.Component {
       currPage: null,
       totalpag: null,
       selectedOption: null,
+      defaultValue:null,
     }
     this.onidmateriaChange = this.onidmateriaChange.bind(this);
     this.onidtipoChange = this.onidtipoChange.bind(this);
@@ -60,7 +61,7 @@ export default class Materias extends React.Component {
   cargar(user) {
     this.setState({
       idmateria: user.idmateria,
-      tipo: {"value":user.idtipo,"label":user.tipo},
+      defaultValue: {"value":user.idtipo,"label":user.tipo},
       materia: user.materia,
       editar: true,
     });
@@ -175,6 +176,7 @@ export default class Materias extends React.Component {
   render() {
     return (
       <div className="content">
+        
         <Row>
           <Col sm="12" md="12">
           <NotificationAlert ref="notify" />
@@ -182,7 +184,7 @@ export default class Materias extends React.Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
               <ModalBody >
-                <FormMaterias tipos={this.state.tipos} selectedOption={this.state.selectedOption} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} tipo={this.state.tipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
+                <FormMaterias tipos={this.state.tipos} defaultValue={this.state.defaultValue} selectedOption={this.state.selectedOption} onmateriaChange={this.onmateriaChange} onidmateriaChange={this.onidmateriaChange} onidtipoChange={this.onidtipoChange} materia={this.state.materia} idtipo={this.state.idtipo} refresh={this.refresh} idmateria={this.state.idmateria} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} notify={this.notify} />
               </ModalBody>
             </Modal>
             <div className="table-resposive">

@@ -1,7 +1,7 @@
 import Dashboard from "views/Dashboard.jsx";
 import Icons from "views/Estudiantes";
 import Maps from "views/Nota.jsx";
-import UserPage from "views/User.jsx";
+// import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
 
@@ -41,12 +41,12 @@ var routes = [
     component: Evaluaciones,
     layout: "/admin"
   },
-  {
-    path: "/table",
-    name: "Usuarios",
-    icon: "nc-icon nc-single-02",
-    component: UserPage,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/table",
+  //   name: "Usuarios",
+  //   icon: "nc-icon nc-single-02",
+  //   component: UserPage,
+  //   layout: "/admin"
+  // },
 ];
 export default routes;

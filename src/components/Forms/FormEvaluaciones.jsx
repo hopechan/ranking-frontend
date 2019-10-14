@@ -7,21 +7,20 @@ export default class FormEvaluaciones extends React.Component {
     //Metodo constructor
     constructor(props) {
         super(props);
+        this.state = {
+            tipo: { "clase": "", "div": "" },
+            descripcion: { "clase": "", "div": "" },
+        }
         this.onChangetipo = this.onChangetipo.bind(this);
         this.onChangedescripcion = this.onChangedescripcion.bind(this);
         this.accion = this.accion.bind(this);
         this.clear = this.clear.bind(this);
         this.toggle = this.toggle.bind(this);
         this.notify = this.notify.bind(this);
-        this.validartipo = this.validartipo.bind(this);
     }
 
     clear(e) {
         this.props.clear();
-    }
-
-    validartipo(e) {
-        this.props.validartipo();
     }
 
     //alertas
@@ -34,19 +33,57 @@ export default class FormEvaluaciones extends React.Component {
     }
 
     onChangetipo(e) {
+        var tipo = e.target.value.trim()
+
+        if (tipo.length < 4) {
+            this.setState({
+                tipo: { "clase": "is-invalid", "div": "* El tipo debe contener 4 o más caracteres" }
+            })
+        } else {
+            this.setState({
+                tipo: { "clase": "is-valid", "div": "" }
+            })
+        }
         this.props.ontipoChange(e.target.value);
     }
 
     onChangedescripcion(e) {
+        var descripcion = e.target.value.trim()
+
+        if (descripcion.length > 80 || descripcion.length < 3) {
+            this.setState({
+                descripcion: { "clase": "is-invalid", "div": "* La descripcion debe contener 3 o más caracteres y menos de 80 caracteres" }
+            })
+        } else {
+            this.setState({
+                descripcion: { "clase": "is-valid", "div": "" }
+            })
+        }
         this.props.ondescripcionChange(e.target.value);
     }
 
     accion(e) {
         e.preventDefault();
-        if (this.props.tipo.length < 4 || this.props.descripcion.length > 80 || this.props.descripcion.length < 3) {
-            this.notify("tr","danger","Tipo de evaluación no agregada","nc-icon nc-zoom-split")
+        var tipo=this.props.tipo.trim()
+        var descripcion=this.props.descripcion.trim()
+        if(tipo.length===0){
+            this.setState({
+                tipo: { "clase": "is-invalid", "div": "* El tipo no puede ir vacio" }
+            })
+        }
+        if(descripcion.length===0){
+            this.setState({
+                descripcion: { "clase": "is-invalid", "div": "* La descripcion no puede ir vacio" }
+            })
+        }
+        if (tipo.length < 4) {
+            this.notify("tr", "danger", "Tipo de evaluación no agregada", "nc-icon nc-zoom-split")
             return;
         }
+        if (descripcion.length > 80 || descripcion.length < 3) {
+            return;
+        }
+         
         if (this.props.editar) {
             const user = {
                 idtipo: this.props.idtipo,
@@ -54,7 +91,7 @@ export default class FormEvaluaciones extends React.Component {
                 descripcion: this.props.descripcion
             };
             API.put('tipo/', user)
-                .then(response => this.props.refresh(response.data),this.notify("tr","warning","Tipo de evaluación editado con exito","nc-icon nc-refresh-69"))
+                .then(response => this.props.refresh(response.data), this.notify("tr", "warning", "Tipo de evaluación editado con exito", "nc-icon nc-refresh-69"))
                 .catch(error => console.log(error))
             this.toggle();
             this.clear();
@@ -64,7 +101,7 @@ export default class FormEvaluaciones extends React.Component {
                 descripcion: this.props.descripcion
             };
             API.post('tipo/', user)
-                .then(response => this.props.refresh(response.data),this.notify("tr","success","Tipo de evaluación agregado con exito","nc-icon nc-simple-add"))
+                .then(response => this.props.refresh(response.data), this.notify("tr", "success", "Tipo de evaluación agregado con exito", "nc-icon nc-simple-add"))
                 .catch(error => console.log(error))
             this.toggle();
             this.clear();
@@ -72,20 +109,17 @@ export default class FormEvaluaciones extends React.Component {
     }
 
     render() {
-        const isvalidtipo = this.props.tipo.length > 3;
-        const isvaliddescripcion = this.props.descripcion.length < 80 && this.props.descripcion.length > 3;
         return (
             <div>
                 <Form onSubmit={this.accion}>
                     <FormGroup>
                         <Label for="tipo">Tipo:</Label>
-                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={`form-control ${ isvalidtipo? 'is-valid':'' }`} value={this.props.tipo} onChange={this.onChangetipo} onKeyUp={this.validartipo}/>
-                        {/* { isvalidtipo? null: <div className='invalid-feedback'>El tipo de evaluación debe tener más de 3 caracteres.</div> } */}
+                        <Input type="text" name="tipo" id="tipo" placeholder="Centro escolar" className={this.state.tipo.clase} value={this.props.tipo} onChange={this.onChangetipo} /> {<div className='invalid-feedback'>{this.state.tipo.div}</div>}
                     </FormGroup>
                     <FormGroup>
                         <Label for="descripción">Descripción:</Label>
-                        <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" className={`form-control ${ isvaliddescripcion? 'is-valid':'is-invalid' }`} value={this.props.descripcion} onChange={this.onChangedescripcion} />
-                        { isvaliddescripcion? null: <div className='invalid-feedback'>La descrioción de evaluación debe tener más de 3 caracteres y no puede contener más de 80 caracteres.</div> }
+                        <Input type="text" name="descripción" id="descripción" placeholder="Esta es un prueba de un centro escolar" className={this.state.descripcion.clase} value={this.props.descripcion} onChange={this.onChangedescripcion} />
+                        {<div className='invalid-feedback'>{this.state.descripcion.div}</div>}
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="success" value={!this.props.editar ? "Agregar" : "Modificar"}>{!this.props.editar ? "Agregar" : "Modificar"}</Button>{' '}

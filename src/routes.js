@@ -1,7 +1,7 @@
 import Dashboard from "views/Dashboard.jsx";
 import Icons from "views/Estudiantes";
 import Maps from "views/Nota.jsx";
-// import UserPage from "views/User.jsx";
+import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
 
@@ -48,5 +48,12 @@ var routes = [
   //   component: UserPage,
   //   layout: "/admin"
   // },
+  {
+    path: "",
+    name: "Ranking",
+    icon: "nc-icon nc-bell-55",
+    component: UserPage,
+    layout: "/ranking"
+  }
 ];
 export default routes;

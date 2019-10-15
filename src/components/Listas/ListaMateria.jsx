@@ -7,9 +7,15 @@ export default class ListaNota extends React.Component {
         super(props);
         this.state = {
             collapse: false,
-            materias: []
+            materias: [],
+            materia : ''
         };
-        this.accion = this.accion.bind(this);
+    }
+
+    handleChange = event => {
+        const { onClick } = this.props;
+        const value = event.target.innerText;
+        onClick(value)
     }
 
     componentWillMount() {
@@ -21,10 +27,7 @@ export default class ListaNota extends React.Component {
         )
     }
 
-    accion(event) {
-        return event.target.innerText;
-    }
-
+    /**Para que esto funcione hay que dar doble clic :'v pero algo es algo */
     render() {
         const { materias } = this.state;
         return (
@@ -32,7 +35,7 @@ export default class ListaNota extends React.Component {
                 <ListGroup>
                     {materias.map((m, i) => {
                         if (this.props.tipo === m.tipo) {
-                            return <ListGroupItem color="info" onClick={this.accion} value = {m.materia} key={i}>{m.materia}</ListGroupItem>
+                            return <ListGroupItem color="info" value = {m.materia} key={i} onClick={this.handleChange}>{m.materia}</ListGroupItem>
                         }
                         return null;
                     })}

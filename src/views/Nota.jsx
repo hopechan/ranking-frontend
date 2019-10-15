@@ -4,21 +4,31 @@ import ListaNota from "../components/Listas/ListaNota";
 import TabsNotas  from "../components/Tabs/TabsNotas";
 
 class Nota extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {materia : ''}
+  }
+
+  updateMateria = materia => {
+    this.setState({materia})
+    console.log(materia);
+  }
+
   render() {
     return (
       <>
         <div className="content">
           <Row>
             <Col md="3" sm="6">
-              <ListaNota tipo = "CCGK"></ListaNota>
+              <ListaNota tipo = "CCGK" materia = {this.state.materia} onClick = {this.updateMateria} ></ListaNota>
               <ListaNota tipo = "Centro Escolar"></ListaNota>
               <ListaNota tipo = "Certificaciones"></ListaNota>
-              <br/>
+              
             </Col>
             <Col md="9" sm="6">
               <Card>
                 <CardBody>
-                  <TabsNotas materia/>
+                  <TabsNotas data={this.updateMateria.bind(this)}/>
                 </CardBody>
               </Card>
             </Col>

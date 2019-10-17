@@ -1,20 +1,19 @@
 .modal-header {
     border-bottom: 1px solid $medium-gray;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     display: block !important;
 
     &.no-border-header{
         border-bottom: 0 none !important;
         & .modal-title{
-            margin-top: 20px;
-
+            margin-top: 5px;
         }
     }
     button.close{
-      &:focus {
-        outline: none;
-      }
+        &:focus {
+            outline: none;
+        }
     }
 }
 .modal-dialog{

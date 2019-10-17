@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
         <div className="content">
           <Row>
             <Col sm="12" md="4">
-              <a href="/admin/Alumnos3">
+              <a href="/admin/estudiantes">
               <Card className="card-stats">
                 <CardBody>
                   <Row>
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
               </Card>
               </a>
             </Col>
-            <Col sm="12" md="4"><a href="/admin/Ranking">
+            <Col sm="12" md="4"><a href="/admin/Alumnos3">
               <Card className="card-stats">
                 <CardBody>
                   <Row>

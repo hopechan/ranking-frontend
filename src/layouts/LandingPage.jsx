@@ -1,20 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col
-} from "reactstrap";
-
+import { Button,Container,Row,Col} from "reactstrap";
 import ExamplesNavbar from "components/landingPage/LandingNavbar";
 import LandingHeader from "components/landingPage/LandingHeader";
 import LandingFooter from "components/landingPage/LandingFooter";

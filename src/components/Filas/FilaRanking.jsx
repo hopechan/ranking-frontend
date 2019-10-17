@@ -4,7 +4,6 @@ import { Button } from 'reactstrap';
 
 export default class FilaEstudiantes extends React.Component {
 
-
     render() {
         return (
             <tr>
@@ -13,7 +12,7 @@ export default class FilaEstudiantes extends React.Component {
                 <td className="text-center"padding="2px">{this.props.user.anio}</td>
                 <td className="text-center" padding="2px">{this.props.user.seccion}</td>
                 <td className="text-center">
-                    <Button color="primary" onClick >Ver más</Button>
+                    <Button color="primary">Ver más</Button>
                 </td>
             </tr>
         );

@@ -3,9 +3,8 @@ import { Row, Col, } from "reactstrap";// reactstrap components
 import TablaRanking from '../components/Tablas/TablaRanking'
 import paginate from 'paginate-array';
 import API from "../components/server/api";
-import Select from 'react-select';
 
-export default class Ranking extends React.Component {
+export default class Alumnos3 extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,8 +25,8 @@ export default class Ranking extends React.Component {
             page: 1,
             currPage: null,
             totalpag: null,
-            selectedOption: { value: 0 },
-            algo:null,
+            selectedOption: 2019,
+            algo: null,
         }
         this.siguiente = this.siguiente.bind(this);
         this.anterior = this.anterior.bind(this);
@@ -36,10 +35,11 @@ export default class Ranking extends React.Component {
         this.numero = this.numero.bind(this);
         this.refresh = this.refresh.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.cargar = this.cargar.bind(this);
     }
-
-    componentDidMount() {
-        API.get(`/estudiante/getByYear/` + this.state.selectedOption.value)
+    
+    cargar(){
+        API.get(`/estudiante/getByYear/` + this.state.selectedOption)
             .then(res => {
                 const estudiantes = res.data;
                 const { page, size } = this.state;
@@ -49,6 +49,10 @@ export default class Ranking extends React.Component {
                     totalpag: this.state.currPage.totalPages
                 })
             })
+    }
+
+    componentDidMount() {
+        this.cargar()
     }
     //para recargar los datos
     refresh() {
@@ -94,14 +98,16 @@ export default class Ranking extends React.Component {
         this.setState({ page: newPage, currPage: newCurrPage });
     }
 
-    handleChange(selectedOption) {
-        this.componentDidMount()
-        this.setState({ selectedOption : selectedOption});
+    handleChange(e) {
+        this.setState({
+            selectedOption: e.target.value
+        })
+        this.cargar()
     };
 
     //metodo para renderizar la vista
     render() {
-        let a = 1;
+        let a = 0;
         let año = [];
         while (a <= 3) {
             año[a] = { value: new Date().getFullYear() - a, label: new Date().getFullYear() - a }
@@ -111,7 +117,13 @@ export default class Ranking extends React.Component {
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
-                        <Select onChange={this.handleChange}  value={this.state.selectedOption} options={año} />
+                        <label>año:</label>
+                        <select className="form-control" onChange={this.handleChange}>
+                            {año.map((prop, key) => (
+                                <option key={key} value={prop.value}>{prop.label}</option>
+                            ))}
+                        </select>
+                        <p className="text-white">a</p>
                         <TablaRanking page={this.state.page} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
                     </Col>
                 </Row>

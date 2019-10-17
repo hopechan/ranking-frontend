@@ -4,6 +4,7 @@ import Maps from "views/Nota.jsx";
 import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
+import Alumnos3 from "views/Alumnos3";
 
 var routes = [
   {
@@ -49,11 +50,19 @@ var routes = [
   //   layout: "/admin"
   // },
   {
-    path: "",
+    path: "/alumnos3",
+    name: "Alumnos 3°",
+    icon: "nc-icon nc-bell-55",
+    component: Alumnos3,
+    layout: "/admin"
+  },
+  {
+    path: "/r",
     name: "Ranking",
     icon: "nc-icon nc-bell-55",
     component: UserPage,
     layout: "/ranking"
-  }
+  },
+
 ];
 export default routes;

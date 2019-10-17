@@ -1,5 +1,5 @@
-@import 'paper-kit/variables';
-@import 'paper-kit/mixins';
+@import 'paper-dashboard/variables';
+@import 'paper-dashboard/mixins';
 
 // Plugins CSS
 @import "paper-kit/plugins/plugin-bootstrap-switch";
@@ -7,33 +7,33 @@
 @import "paper-kit/plugins/plugin-datepicker";
 
 // Core CSS
-@import "paper-kit/buttons";
-@import "paper-kit/inputs";
+@import "paper-dashboard/buttons";
+@import "paper-dashboard/inputs";
 @import "paper-kit/checkbox-radio";
 @import "paper-kit/progress-bars";
 @import "paper-kit/badges";
 @import "paper-kit/pagination";
-@import "paper-kit/typography";
-@import "paper-kit/misc";
+@import "paper-dashboard/typography";
+@import "paper-dashboard/misc";
 @import "paper-kit/labels";
 
 // components
 @import "paper-kit/nucleo-icons";
 @import "paper-kit/social-buttons";
 @import "paper-kit/tabs-navs";
-@import "paper-kit/navbars";
-@import "paper-kit/dropdown";
-@import "paper-kit/alerts";
-@import "paper-kit/images";
+@import "paper-dashboard/navbar";
+@import "paper-dashboard/dropdown";
+@import "paper-dashboard/alerts";
+@import "paper-dashboard/images";
 @import "paper-kit/tooltips-and-popovers";
 @import "paper-kit/modal";
 @import "paper-kit/icons";
 @import "paper-kit/carousel";
-@import "paper-kit/footers";
+@import "paper-dashboard/footers";
 
 // Cards
-@import "paper-kit/cards";
-@import "paper-kit/cards/card-plain";
+@import "paper-dashboard/cards";
+@import "paper-dashboard/cards/card-plain";
 @import "paper-kit/cards/card-register";
 @import "paper-kit/cards/card-profile";
 
@@ -42,7 +42,7 @@
 @import "paper-kit/sections";
 
 
-@import "paper-kit/responsive";
+@import "paper-dashboard/responsive";
 
 // React Differences
 @import "react/react-differences.scss"

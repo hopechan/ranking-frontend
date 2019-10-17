@@ -18,7 +18,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/ranking" render={props => <LandingPage {...props} />} />
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect to="/admin/dashboard" />
+      <Redirect to="/ranking" />
     </Switch>
   </Router>,
   document.getElementById("root")

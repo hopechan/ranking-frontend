@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, } from "reactstrap";// reactstrap components
+import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import TablaRanking from '../components/Tablas/TablaRanking'
 import paginate from 'paginate-array';
 import API from "../components/server/api";
@@ -25,8 +25,8 @@ export default class Alumnos3 extends React.Component {
             page: 1,
             currPage: null,
             totalpag: null,
-            selectedOption: 2019,
-            algo: null,
+            selectedOption: "2019",
+            modal: false,
         }
         this.siguiente = this.siguiente.bind(this);
         this.anterior = this.anterior.bind(this);
@@ -36,10 +36,13 @@ export default class Alumnos3 extends React.Component {
         this.refresh = this.refresh.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.cargar = this.cargar.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
-    
-    cargar(){
-        API.get(`/estudiante/getByYear/` + this.state.selectedOption)
+
+
+
+    cargar(anio = 2019) {
+        API.get(`/estudiante/getByYear/` + anio)
             .then(res => {
                 const estudiantes = res.data;
                 const { page, size } = this.state;
@@ -99,11 +102,14 @@ export default class Alumnos3 extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({
-            selectedOption: e.target.value
-        })
-        this.cargar()
+        this.cargar(e.target.value)
     };
+
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
 
     //metodo para renderizar la vista
     render() {
@@ -117,14 +123,22 @@ export default class Alumnos3 extends React.Component {
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
-                        <label>año:</label>
+                        <label>Año:</label>
                         <select className="form-control" onChange={this.handleChange}>
                             {año.map((prop, key) => (
                                 <option key={key} value={prop.value}>{prop.label}</option>
                             ))}
                         </select>
                         <p className="text-white">a</p>
-                        <TablaRanking page={this.state.page} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
+                        <TablaRanking page={this.state.page} toggle={this.toggle} totalpag={this.state.totalpag} currPage={this.state.currPage} numero={this.numero} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                            <ModalHeader align="center" toggle={this.toggle} className="text-center">Nombre</ModalHeader>
+                            <ModalBody className="text-center">
+                                <table>
+
+                                </table>
+                                </ModalBody>
+                        </Modal>
                     </Col>
                 </Row>
             </div>

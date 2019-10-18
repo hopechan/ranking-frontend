@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
               </Card>
               </a>
             </Col>
-            <Col sm="12" md="4"><a href="/admin/Alumnos3">
+            <Col sm="12" md="4"><a href="/admin/alumnos3">
               <Card className="card-stats">
                 <CardBody>
                   <Row>

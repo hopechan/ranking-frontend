@@ -15,10 +15,15 @@ export default class TablaEstudiantes extends React.Component {
         this.primerapag = this.primerapag.bind(this);
         this.ultimapag = this.ultimapag.bind(this);
         this.numero = this.numero.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     cargar(estudiante) {
         this.props.cargar(estudiante)
+    }
+
+    toggle() {
+        this.props.toggle();
     }
 
     refresh(estudiante) {
@@ -71,7 +76,7 @@ export default class TablaEstudiantes extends React.Component {
                                     {this.props.currPage &&
                                         this.props.currPage.data.map(
                                             (user, i) => (
-                                                <FilaRanking key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
+                                                <FilaRanking key={i} user={user} refresh={this.refresh} toggle={this.toggle} cargar={this.cargar} notify={this.notify} />
                                             )
                                         )}
                                 </tbody>

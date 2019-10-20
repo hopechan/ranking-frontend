@@ -20,21 +20,13 @@ export default class ListaNota extends React.Component{
         }
     }
 
-    updateMateria = materia => { this.setState({materia}) }
-
-    handleChange = event => {
-        const { onClick } = this.props;
-        const value = event.target.innerText;
-        onClick(value);
-    };
-
     render() {
         return (
             <div>
                 <ListGroup>
                     <ListGroupItem onClick={this.toggle}>{this.props.tipo}</ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>
-                        <ListaMateria tipo={this.props.tipo} materia = {this.state.materia} onClick = {this.updateMateria}/>
+                        <ListaMateria tipo={this.props.tipo} materia = {this.state.materia}/>
                     </Collapse>
                 </ListGroup>
             </div>

@@ -157,7 +157,7 @@ export default class FormEvaluaciones extends React.Component {
     onseccionChange(e) {
         var seccion = e.target.value.trim()
 
-        if (seccion.length < 4) {
+        if (seccion.length < 2) {
             this.setState({
                 seccion: { "clase": "is-invalid", "div": "* La seccion debe contener 2 o más caracteres" }
             })

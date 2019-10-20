@@ -7,7 +7,7 @@ export default class TabsNotas extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.state = { activeTab: '1' };
+        this.state = { activeTab: '1'};
     }
 
     toggle(tab) {
@@ -35,9 +35,9 @@ export default class TabsNotas extends React.Component {
                     </NavItem>
                 </Nav>
                 <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="1"><Row><Col sm = "12" md="12"><FormNota anio = {year} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
-                    <TabPane tabId="2"><Row><Col sm = "12" md="12"><FormNota anio = {year - 1} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
-                    <TabPane tabId="3"><Row><Col sm = "12" md="12"><FormNota anio = {year - 2} tipo = "CCGK" materia = "Ingles"/></Col></Row></TabPane>
+                    <TabPane tabId="1"><Row><Col sm = "12" md="12"><FormNota anio = {year} tipo = {this.props.tipo} materia = {this.props.materia} notify={this.props.notify}/></Col></Row></TabPane>
+                    <TabPane tabId="2"><Row><Col sm = "12" md="12"><FormNota anio = {year - 1} tipo = {this.props.tipo} materia = {this.props.materia} notify={this.props.notify}/></Col></Row></TabPane>
+                    <TabPane tabId="3"><Row><Col sm = "12" md="12"><FormNota anio = {year - 2} tipo = {this.props.tipo} materia = {this.props.materia} notify={this.props.notify}/></Col></Row></TabPane>
                 </TabContent>
             </div>
         );

@@ -2,7 +2,7 @@ import React from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import API from "../server/api";
 
-export default class ListaNota extends React.Component {
+export default class ListaMateria extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

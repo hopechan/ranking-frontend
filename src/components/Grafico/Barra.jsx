@@ -19,7 +19,7 @@ class Barra extends React.Component {
 
     async getData(){
         let data = 
-        fetch(`http://localhost/ROp/api/Nota/ranking/2018`)
+        fetch(`http://localhost/ROp/api/Nota/ranking/2017`)
         .then(res => {return res.json()})
         .catch(error => console.log(`Ha ocurrido el error: ${error}`));
         return data;

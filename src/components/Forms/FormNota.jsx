@@ -23,7 +23,7 @@ export default class FormNota extends React.Component {
         this.props.clear();
     }
 
-    componentDidMount(){
+    componentDidUpdate(){
         API.get(`nota/notasPorMateria/${this.props.anio}/${this.props.tipo}/${this.props.materia}`)
             .then(res => {
                 const notas = res.data
@@ -34,7 +34,8 @@ export default class FormNota extends React.Component {
 
     //alertas
     notify(place, color, message, icon) {
-        this.props.notify(place, color, message, icon);
+        //this.props.notify(place, color, message, icon);
+        alert('Notas actualizadas')
     }
 
     accion(e){
@@ -45,8 +46,40 @@ export default class FormNota extends React.Component {
         this.props.toggle();
     }
 
+    editar = (data) => {
+        //let campos = document.querySelectorAll(`.campo-${data.idestudiante}`)
+        Array.from(document.querySelectorAll(`.campo-${data.idestudiante}`)).forEach(c => {c.removeAttribute('disabled', '')})
+    }
+
+    guardar = (data) => {
+        let n1 = document.querySelector(`#n1-${data.idestudiante}`).value
+        let n2 = document.querySelector(`#n2-${data.idestudiante}`).value
+        let n3 = document.querySelector(`#n3-${data.idestudiante}`).value
+        let n4 = document.querySelector(`#n4-${data.idestudiante}`).value
+        const nota = {
+            idestudiante : data.idestudiante,
+            idmateria: data.idmateria,
+            nota_p1 : n1,
+            nota_p2 : n2,
+            nota_p3 : n3,
+            nota_p4 : n4
+        }
+        console.log(nota);
+        
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        console.log(`nota/${data.idnota}`);
+        API.put(`nota/${data.idnota}`, JSON.stringify(nota), {headers})
+            .then(response => alert(response.data))
+            .catch(error => console.log(error))
+    }
+
+    onChange(e){}
+
     render(){
         const notas = this.state.notas;
+        //console.log(`${this.props.anio}/${this.props.tipo}/${this.props.materia}`);
         return (
             <Table responsive>
                 <thead>
@@ -64,15 +97,15 @@ export default class FormNota extends React.Component {
                     {notas.map((n, i) =>{
                         return <tr key={i}>
                                 <td>{n.Estudiante}</td>
-                                <td><Input value = {n.nota_p1} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
-                                <td><Input value = {n.nota_p2} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
-                                <td><Input value = {n.nota_p3} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
-                                <td><Input value = {n.nota_p4} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
-                                <td><Input value = {n.nota_p4} type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
+                                <td><Input defaultValue = {n.nota_p1} type = "number" step = "0.01" min = "0.0" max = "10.0" required className = {`campo-${n.idestudiante}`} id={`n1-${n.idestudiante}`} /></td>
+                                <td><Input defaultValue = {n.nota_p2} type = "number" step = "0.01" min = "0.0" max = "10.0" required className = {`campo-${n.idestudiante}`} id={`n2-${n.idestudiante}`}/></td>
+                                <td><Input defaultValue = {n.nota_p3} type = "number" step = "0.01" min = "0.0" max = "10.0" required className = {`campo-${n.idestudiante}`} id={`n3-${n.idestudiante}`}/></td>
+                                <td><Input defaultValue = {n.nota_p4} type = "number" step = "0.01" min = "0.0" max = "10.0" required className = {`campo-${n.idestudiante}`} id={`n4-${n.idestudiante}`}/></td>
+                                <td><Input defaultValue = '00.0' type = "number" step = "0.01" min = "0.0" max = "10.0" required disabled/></td>
                                 <td>
                                     <Row>
-                                        <Col sm = "6" md = "6"><Button color="success">G</Button></Col>
-                                        <Col sm = "6" md = "6"><Button color="warning">E</Button></Col>
+                                        <Col sm = "6" md = "6"><Button color="success" onClick={() => this.editar(n)}>G</Button></Col>
+                                        <Col sm = "6" md = "6"><Button color="warning" onClick={() => this.guardar(n)}>E</Button></Col>
                                     </Row>
                                 </td>
                             </tr>

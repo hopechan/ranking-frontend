@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
+import { Row, Col, Modal, ModalHeader, ModalBody } from "reactstrap";// reactstrap components
 import TablaRanking from '../components/Tablas/TablaRanking'
 import paginate from 'paginate-array';
 import API from "../components/server/api";

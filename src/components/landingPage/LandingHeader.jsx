@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 function LandingHeader() {
   let pageHeader = React.createRef();

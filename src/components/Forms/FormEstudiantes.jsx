@@ -120,7 +120,18 @@ export default class FormEvaluaciones extends React.Component {
     }
 
     onemailChange(e) {
-        //algo
+        var email = e.target.value.trim()
+
+        if (email.length === 0) {
+            this.setState({
+                email: { "clase": "is-invalid", "div": "* El email no puede ir vacio" }
+            })
+        }else {
+            this.setState({
+                email: { "clase": "is-valid", "div": "" }
+            })
+        }
+
         this.props.onemailChange(e.target.value);
     }
 

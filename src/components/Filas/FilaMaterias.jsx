@@ -21,6 +21,7 @@ export default class FilaMaterias extends React.Component {
         API.delete(`materia/` + this.props.user.idmateria)
             .then(response => this.props.refresh(response.data), this.notify("tr", "danger", "Materia eliminada", "nc-icon nc-simple-remove"))
             .catch(error => console.log(error));
+            this.toggle()
     }
 
     //alertas

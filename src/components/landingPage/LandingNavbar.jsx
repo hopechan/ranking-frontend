@@ -54,6 +54,7 @@ function LandingNavbar() {
             to="/index"
             title="Ranking Oportunidades"
             tag={Link}
+            className="text-white"
           >
             Ranking Oportunidades
           </NavbarBrand>

@@ -5,9 +5,8 @@ import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// 
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
 import paginate from 'paginate-array';
-import Buscador from '../components/Buscador/Buscador';
 import '../assets/css/Materia.css';
-
+import AsyncSelect from "react-select/async";
 export default class Estudiantes extends React.Component {
 
   constructor(props) {
@@ -30,7 +29,9 @@ export default class Estudiantes extends React.Component {
       size: 4,
       page: 1,
       currPage: null,
-      totalpag: null
+      totalpag: null,
+      busqueda: {},
+      bestudiantes: [],
     }
     this.onnombreChange = this.onnombreChange.bind(this);
     this.onapellidosChange = this.onapellidosChange.bind(this);
@@ -51,8 +52,7 @@ export default class Estudiantes extends React.Component {
     this.primerapag = this.primerapag.bind(this);
     this.ultimapag = this.ultimapag.bind(this);
     this.numero = this.numero.bind(this);
-    this.handleTermChange = this.handleTermChange.bind(this);
-    }
+  }
 
   //para cargar la informacion en el modal de editar
   cargar(user) {
@@ -69,7 +69,7 @@ export default class Estudiantes extends React.Component {
       centro_escolar: user.centro_escolar,
       editar: true
     });
-  this.toggle();
+    this.toggle();
   }
 
   //Metodo para las Alertas
@@ -92,12 +92,12 @@ export default class Estudiantes extends React.Component {
         const estudiantes = res.data;
         const { page, size } = this.state;
         const currPage = paginate(estudiantes, page, size);
-        this.setState({ ...this.state, estudiantes, currPage});
+        this.setState({ ...this.state, estudiantes, currPage });
         this.setState({
           totalpag: this.state.currPage.totalPages
         })
       })
-    }
+  }
 
   //metodo para abrir el modal
   toggle() {
@@ -186,7 +186,7 @@ export default class Estudiantes extends React.Component {
   }
 
   ultimapag() {
-    const { size, estudiantes,currPage } = this.state;
+    const { size, estudiantes, currPage } = this.state;
     const newPage = currPage.totalPages;
     const newCurrPage = paginate(estudiantes, newPage, size);
     this.setState({ page: newPage, currPage: newCurrPage });
@@ -199,9 +199,38 @@ export default class Estudiantes extends React.Component {
     this.setState({ page: newPage, currPage: newCurrPage });
   }
 
-  handleTermChange(busqueda){
-    console.log(busqueda);
-  }
+  buscar = (inputValue, callback) => {
+    if (!inputValue) {
+        callback(["nada"])
+    } else {
+        setTimeout(() => {
+            fetch(`http://localhost/ROp/api/estudiante/buscar/${inputValue}`, { method: "GET" })
+                .then((res) => { return res.json() })
+                .then((data) => {
+                    const tempArray = [];
+                    data.forEach((element) => {
+                        tempArray.push({ label: `${element.nombre} ${element.apellidos}`, value: element.idestudiante,idestudiante: element.idestudiante, nombre: element.nombre,apellidos: element.apellidos,anio: element.anio,centro_escolar: element.centro_escolar,direccion: element.direccion,email: element.email,fecha_nacimiento: element.fecha_nacimiento,seccion: element.seccion,telefono: element.telefono  });
+                    })
+                    callback(tempArray);
+                    this.setState({ bestudiantes:tempArray })
+                })
+                .catch((error) => { console.log(error, "Ha ocurrido un error") })
+        }, 1000);
+    }
+}
+
+onSearchChange = (busqueda) => {
+    if (busqueda) {
+        this.setState({ busqueda })
+    }
+    const estudiantes = this.state.bestudiantes;
+        const { page, size } = this.state;
+        const currPage = paginate(estudiantes, page, size);
+        this.setState({ ...this.state, estudiantes, currPage });
+        this.setState({
+          totalpag: this.state.currPage.totalPages
+        })
+}
 
   //metodo para limpiar los campos y el editar
   clear() {
@@ -228,16 +257,16 @@ export default class Estudiantes extends React.Component {
           <Col sm="12" md="12" lg="12">
             <NotificationAlert ref="notify" />
             <Row>
-              <Col sm = "6" md ="6"><Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button></Col>
-              <Col sm = "6" md = {{ size: 3, offset: 3}}><Buscador onTermChange={this.handleTermChange}></Buscador></Col>
+              <Col sm="6" md="6"><Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button></Col>
+              <Col sm="6" md={{ size: 3, offset: 3 }}><AsyncSelect value={this.state.busqueda} loadOptions={this.buscar} onChange={(e) => { this.onSearchChange(e) }}defaultOptions={false}></AsyncSelect></Col>
             </Row>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nuevo Estudiante" : "Editar Estudiante"}</ModalHeader>
               <ModalBody >
-                <FormEstudiantes onnombreChange={this.onnombreChange}  nombre={this.state.nombre} onapellidosChange={this.onapellidosChange}  apellidos={this.state.apellidos} onfecha_nacimientoChange={this.onfecha_nacimientoChange}  fecha_nacimiento={this.state.fecha_nacimiento} ontelefonoChange={this.ontelefonoChange}  telefono={this.state.telefono} onemailChange={this.onemailChange}  email={this.state.email} ondireccionChange={this.ondireccionChange}  direccion={this.state.direccion} onanioChange={this.onanioChange}  anio={this.state.anio} onseccionChange={this.onseccionChange}  seccion={this.state.seccion} oncentro_escolarChange={this.oncentro_escolarChange}  centro_escolar={this.state.centro_escolar} refresh={this.refresh} idtipo={this.state.idtipo} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} idestudiante={this.state.idestudiante} notify={this.notify} />
+                <FormEstudiantes onnombreChange={this.onnombreChange} nombre={this.state.nombre} onapellidosChange={this.onapellidosChange} apellidos={this.state.apellidos} onfecha_nacimientoChange={this.onfecha_nacimientoChange} fecha_nacimiento={this.state.fecha_nacimiento} ontelefonoChange={this.ontelefonoChange} telefono={this.state.telefono} onemailChange={this.onemailChange} email={this.state.email} ondireccionChange={this.ondireccionChange} direccion={this.state.direccion} onanioChange={this.onanioChange} anio={this.state.anio} onseccionChange={this.onseccionChange} seccion={this.state.seccion} oncentro_escolarChange={this.oncentro_escolarChange} centro_escolar={this.state.centro_escolar} refresh={this.refresh} idtipo={this.state.idtipo} editar={this.state.editar} clear={this.clear} cargar={this.cargar} toggle={this.toggle} idestudiante={this.state.idestudiante} notify={this.notify} />
               </ModalBody>
             </Modal>
-              <TablaEstudiantes estudiantes={this.state.estudiantes} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
+            <TablaEstudiantes estudiantes={this.state.estudiantes} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
           </Col>
         </Row>
       </div>

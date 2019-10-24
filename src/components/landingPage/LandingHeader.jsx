@@ -32,6 +32,8 @@ function LandingHeader() {
         <Container>
           <div className="motto text-center">
             <br />
+            <h1 id="mensaje">Ranking</h1>
+            <h1 id="mensaje"> Oportunidades</h1>
           </div>
         </Container>
       </div>

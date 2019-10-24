@@ -59,7 +59,6 @@ export default class TablaEstudiantes extends React.Component {
             i++;
         }
         return (
-
             <div>
                 <div>
                     <Card>
@@ -85,17 +84,18 @@ export default class TablaEstudiantes extends React.Component {
                                             (user, i) => (
                                                 <FilaEstudiantes key={i} user={user} refresh={this.refresh} cargar={this.cargar} notify={this.notify} />
                                             )
-                                        )}
+                                        )
+                                        }
                                 </tbody>
                             </Table>
                         </CardBody>
                         <CardFooter className="mx-auto">
-                            <Pagination>
+                            <Pagination id="opcion">
                                 <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
-                                    <PaginationLink first onClick={this.primerapag} className="bg-dark text-white"/>
+                                    <PaginationLink first onClick={this.primerapag} className="bg-dark text-white" />
                                 </PaginationItem>
                                 <PaginationItem className={this.props.page === 1 ? "disabled" : ""} >
-                                    <PaginationLink previous onClick={this.anterior} className="bg-dark text-white"/>
+                                    <PaginationLink previous onClick={this.anterior} className="bg-dark text-white" />
                                 </PaginationItem>
                                 {/* Para los numeros dinamicos de la paginación */}
                                 {array.map((item, i) => (
@@ -104,10 +104,10 @@ export default class TablaEstudiantes extends React.Component {
                                     </PaginationItem>
                                 ))}
                                 <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                                    <PaginationLink next onClick={this.siguiente} className="bg-dark text-white"/>
+                                    <PaginationLink next onClick={this.siguiente} className="bg-dark text-white" />
                                 </PaginationItem>
                                 <PaginationItem className={this.props.page === this.props.totalpag ? "disabled" : ""}>
-                                    <PaginationLink last onClick={this.ultimapag} className="bg-dark text-white"/>
+                                    <PaginationLink last onClick={this.ultimapag} className="bg-dark text-white" />
                                 </PaginationItem>
                             </Pagination>
                         </CardFooter>

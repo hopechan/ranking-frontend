@@ -86,7 +86,7 @@ export default class TablaMaterias extends React.Component {
                             </Table>
                         </CardBody>
                         <CardFooter className="mx-auto">
-                            <Pagination>
+                            <Pagination id="opcion">
                                 <PaginationItem className={this.props.page <= 2 ? "disabled" : ""}>
                                     <PaginationLink first onClick={this.primerapag} className="bg-dark text-white" />
                                 </PaginationItem>

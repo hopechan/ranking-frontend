@@ -139,7 +139,7 @@ export default class FormEvaluaciones extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="idtipo">Tipo:</Label>
-                        <Select defaultValue={this.props.defaultValue} onChange={this.handleChange} options={array} />
+                        <Select placeholder="Seleccione un tipo" defaultValue={this.props.defaultValue} onChange={this.handleChange} options={array} />
                         {<div className='invalid-feedback'>{this.state.tipo.div}</div>}
                     </FormGroup>
                     <FormGroup>

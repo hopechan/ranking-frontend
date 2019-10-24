@@ -4,6 +4,7 @@ import ExamplesNavbar from "components/landingPage/LandingNavbar";
 import LandingHeader from "components/landingPage/LandingHeader";
 import LandingFooter from "components/landingPage/LandingFooter";
 import Barra from "components/Grafico/Barra"
+import '../assets/css/texto.css';
 
 function LandingPage() {
   document.documentElement.classList.remove("nav-open");

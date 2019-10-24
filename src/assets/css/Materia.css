@@ -11,6 +11,12 @@ td {
     display: inline-flex;
 }
 
+@media only screen and (max-width: 325px) {
+    #opcion{
+        padding: 1px;
+    }
+}
+
 .active{
     border-color: aliceblue !important;
     color:white !important;

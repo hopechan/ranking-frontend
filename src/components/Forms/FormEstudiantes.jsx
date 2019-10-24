@@ -342,7 +342,7 @@ export default class FormEvaluaciones extends React.Component {
                         <Col md={12}>
                             <FormGroup>
                                 <Label for="nombre">Nombre:</Label>
-                                <Input type="text" className={this.state.nombre.clase} placeholder="Juan" value={this.props.nombre} onChange={this.onnombreChange} />
+                                <Input type="text" className={this.state.nombre.clase} placeholder="Juan" value={this.props.nombre} onChange={this.onnombreChange}/>
                                 {<div className='invalid-feedback'>{this.state.nombre.div}</div>}
                             </FormGroup>
                             <FormGroup>

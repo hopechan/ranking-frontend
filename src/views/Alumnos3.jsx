@@ -25,7 +25,6 @@ export default class Alumnos3 extends React.Component {
             page: 1,
             currPage: null,
             totalpag: null,
-            selectedOption: "2019",
             modal: false,
         }
         this.siguiente = this.siguiente.bind(this);
@@ -41,7 +40,7 @@ export default class Alumnos3 extends React.Component {
 
 
 
-    cargar(anio = 2019) {
+    cargar(anio = 2017) {
         API.get(`/estudiante/getByYear/` + anio)
             .then(res => {
                 const estudiantes = res.data;
@@ -119,12 +118,13 @@ export default class Alumnos3 extends React.Component {
             año[a] = { value: new Date().getFullYear() - a, label: new Date().getFullYear() - a }
             a++;
         }
+        var anio = new Date().getFullYear()-2
         return (
             <div className="content">
                 <Row>
                     <Col sm="12" md="12" lg="12">
                         <label>Año:</label>
-                        <select className="form-control" onChange={this.handleChange}>
+                        <select className="form-control" defaultValue={anio} onChange={this.handleChange}>
                             {año.map((prop, key) => (
                                 <option key={key} value={prop.value}>{prop.label}</option>
                             ))}

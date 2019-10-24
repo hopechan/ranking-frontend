@@ -1,12 +1,12 @@
 import React from "react";
-import TablaEvaluaciones from '../components/Tablas/TablaEvaluaciones'
+import TablaCentroEscolar from '../components/Tablas/TablaCentroEscolar'
 import FormEvaluaciones from '../components/Forms/FormEvaluaciones'
 import { Row, Col, Modal, ModalHeader, ModalBody, Button } from "reactstrap";// reactstrap components
 import API from "../components/server/api";
 import NotificationAlert from 'react-notification-alert';
 import paginate from 'paginate-array';
 
-export default class Evaluaciones extends React.Component {
+export default class CentroEscolar extends React.Component {
 
   //Metodo Constructor
   constructor(props) {
@@ -172,7 +172,7 @@ export default class Evaluaciones extends React.Component {
         <Row>
           <Col sm="12" md="12" lg="12">
           <NotificationAlert ref="notify" />
-            <Button className="text-center" color="danger" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Tipo de Evaluación</Button>
+            <Button className="text-center" color="danger" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Centro Escolar</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nuevo Tipo" : "Editar Tipo"}</ModalHeader>
               <ModalBody >
@@ -180,7 +180,7 @@ export default class Evaluaciones extends React.Component {
               </ModalBody>
             </Modal>
             <div className="table-resposive">
-              <TablaEvaluaciones tipos={this.state.tipos} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
+              <TablaCentroEscolar tipos={this.state.tipos} page={this.state.page} currPage={this.state.currPage} numero={this.numero} totalpag={this.state.totalpag} refresh={this.refresh} cargar={this.cargar} notify={this.notify} siguiente={this.siguiente} anterior={this.anterior} primerapag={this.primerapag} ultimapag={this.ultimapag} responsive />
             </div>
           </Col>
         </Row>

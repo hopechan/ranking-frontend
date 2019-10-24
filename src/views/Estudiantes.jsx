@@ -257,7 +257,7 @@ onSearchChange = (busqueda) => {
           <Col sm="12" md="12" lg="12">
             <NotificationAlert ref="notify" />
             <Row>
-              <Col sm="6" md="6"><Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button></Col>
+              <Col sm="6" md="6"><Button className="text-center" color="danger" onClick={this.toggle}>{this.props.buttonLabel} Agregar un Estudiante</Button></Col>
               <Col sm="6" md={{ size: 3, offset: 3 }}><AsyncSelect value={this.state.busqueda} loadOptions={this.buscar} onChange={(e) => { this.onSearchChange(e) }}defaultOptions={false}></AsyncSelect></Col>
             </Row>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>

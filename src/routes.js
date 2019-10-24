@@ -5,6 +5,9 @@ import UserPage from "views/User.jsx";
 import Evaluaciones from "views/Evaluaciones";
 import Materias from "views/Materias";
 import Alumnos3 from "views/Alumnos3";
+import RankingTabla from "views/RankingTabla";
+import CentroEscolar from "views/CentroEscolar";
+
 
 var routes = [
   {
@@ -54,6 +57,20 @@ var routes = [
     name: "Alumnos 3°",
     icon: "nc-icon nc-bell-55",
     component: Alumnos3,
+    layout: "/admin"
+  },
+  {
+    path: "/CentroEscolar",
+    name: "Centro Escolar",
+    icon: "nc-icon nc-bell-55",
+    component: CentroEscolar,
+    layout: "/admin"
+  },
+  {
+    path: "ranking tabla",
+    name: "ranking tabla",
+    icon: "nc-icon nc-bell-55",
+    component: RankingTabla,
     layout: "/admin"
   },
   {

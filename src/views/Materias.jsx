@@ -180,7 +180,7 @@ export default class Materias extends React.Component {
         <Row>
           <Col sm="12" md="12">
           <NotificationAlert ref="notify" />
-            <Button className="text-center" color="success" onClick={this.toggle}>{this.props.buttonLabel} Agregar una Materia</Button>
+            <Button className="text-center" color="danger" onClick={this.toggle}>{this.props.buttonLabel} Agregar una Materia</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader align="center" toggle={this.toggle} className="text-center">{!this.state.editar ? "Agregar Nueva materia" : "Editar materia"}</ModalHeader>
               <ModalBody >
